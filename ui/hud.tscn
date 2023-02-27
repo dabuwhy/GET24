@@ -1,0 +1,197 @@
+[gd_scene load_steps=19 format=3 uid="uid://c0fbopu1qbxkp"]
+
+[ext_resource type="Script" path="res://ui/hud.gd" id="1_wge0f"]
+[ext_resource type="Shader" path="res://sky.gdshader" id="2_m7fc1"]
+[ext_resource type="Texture2D" uid="uid://bdcoinleyv61j" path="res://res/solution_black.png" id="4_dv76a"]
+[ext_resource type="Texture2D" uid="uid://c00fdryd8us3m" path="res://res/solution_grey.png" id="5_8e6dt"]
+[ext_resource type="Texture2D" uid="uid://dddl27muc7l1y" path="res://res/revoke_black.png" id="6_4bobi"]
+[ext_resource type="Texture2D" uid="uid://d2bva1nwq8ces" path="res://res/revoke_grey.png" id="7_ie24v"]
+[ext_resource type="Texture2D" uid="uid://ck1q0t5p8nrjv" path="res://res/restart_black.png" id="8_okqa1"]
+[ext_resource type="Texture2D" uid="uid://6haccvppydpl" path="res://res/restart_grey.png" id="9_scogh"]
+[ext_resource type="Texture2D" uid="uid://ck8m21ggrv6ut" path="res://res/menu_black.png" id="10_je82m"]
+[ext_resource type="Texture2D" uid="uid://mj3ppxys0cst" path="res://res/menu_grey.png" id="11_nu0bm"]
+[ext_resource type="Texture2D" uid="uid://cn0fleb1wufmr" path="res://res/pause_black.png" id="12_dx67f"]
+[ext_resource type="Texture2D" uid="uid://b0v1hh5ctrv44" path="res://res/pause_grey.png" id="13_bxq3e"]
+[ext_resource type="Texture2D" uid="uid://cu8vseakfxwfp" path="res://res/continue_black.png" id="14_gru7b"]
+[ext_resource type="Texture2D" uid="uid://c8q7ksn45ef0d" path="res://res/continue_grey.png" id="15_w51a3"]
+[ext_resource type="Theme" uid="uid://k8y8ag1ldtm2" path="res://ui/menu.tres" id="16_mtjkn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_368dl"]
+shader = ExtResource("2_m7fc1")
+shader_parameter/cloudscale = 1.1
+shader_parameter/speed = 0.003
+shader_parameter/clouddark = 0.5
+shader_parameter/cloudlight = 0.3
+shader_parameter/cloudcover = 0.2
+shader_parameter/cloudalpha = 8.0
+shader_parameter/skytint = 0.5
+shader_parameter/skycolour1 = Vector3(0.2, 0.4, 0.6)
+shader_parameter/skycolour2 = Vector3(0.4, 0.7, 1)
+shader_parameter/m = Transform2D(1.6, -1.2, 1.2, 1.6, 0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_svj72"]
+line_spacing = 0.0
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_dbae7"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_wge0f")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_368dl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="time" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 0.258
+anchor_bottom = 0.122
+offset_left = 20.0
+offset_top = 31.0
+offset_right = -23.76
+offset_bottom = -32.76
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+label_settings = SubResource("LabelSettings_svj72")
+vertical_alignment = 1
+visible_characters = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.123
+offset_left = 162.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -21.84
+grow_horizontal = 2
+
+[node name="Control5" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="solution" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("4_dv76a")
+texture_hover = ExtResource("5_8e6dt")
+texture_disabled = ExtResource("5_8e6dt")
+
+[node name="Control6" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="revoke" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+disabled = true
+texture_normal = ExtResource("6_4bobi")
+texture_hover = ExtResource("7_ie24v")
+texture_disabled = ExtResource("7_ie24v")
+
+[node name="Control7" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="forward" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+disabled = true
+texture_normal = ExtResource("6_4bobi")
+texture_hover = ExtResource("7_ie24v")
+texture_disabled = ExtResource("7_ie24v")
+flip_h = true
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 7.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.933333, 0.243137, 0.172549, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 17
+theme_override_font_sizes/font_size = 66
+text = "24"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 12.0
+
+[node name="restart" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("8_okqa1")
+texture_hover = ExtResource("9_scogh")
+
+[node name="Control3" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="menu" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("10_je82m")
+texture_hover = ExtResource("11_nu0bm")
+
+[node name="Control4" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="pause" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("12_dx67f")
+texture_hover = ExtResource("13_bxq3e")
+texture_disabled = ExtResource("13_bxq3e")
+
+[node name="continue" type="TextureButton" parent="HBoxContainer"]
+process_mode = 3
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("14_gru7b")
+texture_hover = ExtResource("15_w51a3")
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+position = Vector2i(0, 200)
+size = Vector2i(720, 99)
+theme = ExtResource("16_mtjkn")
+
+[node name="Label" type="Label" parent="PopupPanel"]
+offset_right = 720.0
+offset_bottom = 99.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+theme_override_fonts/font = SubResource("FontVariation_dbae7")
+text = "1+1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="HBoxContainer/solution" to="." method="_on_solution_pressed"]
+[connection signal="pressed" from="HBoxContainer/revoke" to="." method="_on_revoke_pressed"]
+[connection signal="pressed" from="HBoxContainer/forward" to="." method="_on_forward_pressed"]
+[connection signal="pressed" from="HBoxContainer/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="HBoxContainer/menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="HBoxContainer/pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="HBoxContainer/continue" to="." method="_on_continue_pressed"]
+[connection signal="visibility_changed" from="HBoxContainer/continue" to="." method="_on_continue_visibility_changed"]
+[connection signal="gui_input" from="PopupPanel/Label" to="." method="_on_label_gui_input"]

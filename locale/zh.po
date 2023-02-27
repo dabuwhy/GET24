@@ -1,0 +1,90 @@
+# LANGUAGE translation for 1030 for the following files:
+# res://ui/menu.tscn
+#
+# FIRST AUTHOR < EMAIL @ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1030\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: zh\n"
+
+#: ui/menu.tscn
+msgid "GET  24"
+msgstr "得到  24"
+
+#: ui/menu.tscn
+msgid "Start"
+msgstr "开始"
+
+#: ui/menu.tscn
+msgid "Option"
+msgstr "选项"
+
+#: ui/menu.tscn
+msgid "Best Records"
+msgstr "最佳纪录"
+
+#: ui/menu.tscn
+msgid "Quit"
+msgstr "离开"
+
+#: ui/menu.tscn
+msgid "Rounds: 1"
+msgstr "局数：  1"
+
+#: ui/menu.tscn
+msgid "Rounds: 10"
+msgstr "局数：  10"
+
+#: ui/menu.tscn
+msgid "1          4          7          10"
+msgstr "1        4        7       10"
+
+#: ui/menu.tscn
+msgid "          training   competition"
+msgstr "                练习   比赛"
+
+#: ui/menu.tscn
+msgid "Music:  OFF"
+msgstr "音乐：  关"
+
+#: ui/menu.tscn
+msgid "Music:  ON"
+msgstr "音乐：  开"
+
+#: ui/menu.tscn
+msgid "SFX:  OFF"
+msgstr "音效：  关"
+
+#: ui/menu.tscn
+msgid "SFX:  ON"
+msgstr "音效：  开"
+
+#: ui/menu.tscn
+msgid "Language:  "
+msgstr "语言：  "
+
+#: ui/menu.tscn
+msgid "Chinese"
+msgstr "中文"
+
+#: ui/menu.tscn
+msgid "English"
+msgstr "英文"
+
+#: ui/menu.tscn
+msgid "Back"
+msgstr "返回"
+
+#: ui/menu.tscn
+msgid "Drag to add, subtract, multiply, and divide.\nProduced by dabuwhy@qq.com"
+msgstr "拖动以便进行加减乘除\ndabuwhy@qq.com"
+
+#: ui/menu.tscn
+msgid "Best record in 10 rounds"
+msgstr "10局赛最佳纪录"

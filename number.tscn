@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7hlcy533gtdm"]
+
+[ext_resource type="Script" path="res://number.gd" id="1_37d70"]
+[ext_resource type="PackedScene" uid="uid://pxu8xbh0ogq" path="res://operator.tscn" id="1_deks1"]
+[ext_resource type="Script" path="res://Area2D.gd" id="3_ht520"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xq2vc"]
+radius = 47.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bugim"]
+size = Vector2(200, 200)
+
+[node name="Number" type="Area2D"]
+script = ExtResource("1_37d70")
+
+[node name="operator" parent="." instance=ExtResource("1_deks1")]
+modulate = Color(1, 1, 1, 0.431373)
+position = Vector2(50, 50)
+
+[node name="operator2" parent="." instance=ExtResource("1_deks1")]
+modulate = Color(1, 1, 1, 0.6)
+position = Vector2(150, 50)
+operator = "‒"
+opColor = Color(0.172549, 0.635294, 0.384314, 1)
+
+[node name="operator3" parent="." instance=ExtResource("1_deks1")]
+modulate = Color(1, 1, 1, 0.6)
+position = Vector2(50, 150)
+operator = "×"
+opColor = Color(0.843137, 0.333333, 0.835294, 1)
+
+[node name="operator4" parent="." instance=ExtResource("1_deks1")]
+modulate = Color(1, 1, 1, 0.6)
+position = Vector2(150, 150)
+operator = "÷"
+opColor = Color(0.807843, 0.619608, 0, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+z_index = 10
+monitorable = false
+script = ExtResource("3_ht520")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(100, 100)
+shape = SubResource("CircleShape2D_xq2vc")
+
+[node name="Label" type="Label" parent="Area2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 83.0
+offset_top = 65.0
+offset_right = 116.0
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 50
+text = "7"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(100, 100)
+shape = SubResource("RectangleShape2D_bugim")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

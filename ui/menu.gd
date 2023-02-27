@@ -1,0 +1,94 @@
+extends Control
+#@onready var mainScene = preload("res://main.tscn").instantiate()
+@onready var control = $Control
+@onready var rounds = $Control/optionMenu/Rounds
+@onready var leaderboardLabel = $Control/VBoxContainer/leaderboard
+@onready var music = $Control/optionMenu/Music
+@onready var sfx = $Control/optionMenu/SFX
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	self.z_index=2
+	rounds.text="Rounds: "+str(Globals.round_set)
+	leaderboardLabel.text=""
+	var ks=Globals.leaderboard.keys()
+	ks.sort()
+	for k in ks:
+		leaderboardLabel.text+="%d:%02d    \t"%[k/60,k%60]+Globals.leaderboard[k]+'\n'
+	if TranslationServer.get_locale()=="en":
+		$Control/optionMenu/HBoxContainer2/OptionButton.select(1)
+	if AudioServer.is_bus_mute(Globals.BGM_IDX):
+		music.text="Music:  OFF"
+	else:
+		music.text="Music:  ON"
+	if AudioServer.is_bus_mute(Globals.SFX_IDX):
+		sfx.text="SFX:  OFF"
+	else:
+		sfx.text="SFX:  ON"
+		
+
+
+func _on_start_pressed():
+	if Globals.round_set==10:
+		Globals.round_index=1
+		Globals.restart()
+	Globals.started_at=Time.get_unix_time_from_system()
+	Globals.go_to_world("res://main.tscn")
+#	get_tree().get_root().add_child(mainScene)
+func _on_quit_pressed():
+	get_tree().quit()
+	
+
+func _on_leaderboard_pressed():
+	var tween=get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(control,"anchor_left",0.334,0.5)
+	tween.parallel().tween_property(control,"anchor_right",1.334,0.5)
+
+
+func _on_back_pressed():
+	var tween=get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(control,"anchor_left",0,0.5)
+	tween.parallel().tween_property(control,"anchor_right",1,0.5)
+
+
+func _on_option_pressed():
+	var tween=get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(control,"anchor_left",-0.334,0.5)
+	tween.parallel().tween_property(control,"anchor_right",0.666,0.5)
+
+
+func _on_option_button_item_selected(index):
+	if index==0:
+		TranslationServer.set_locale("zh")
+	else:
+		TranslationServer.set_locale("en")
+	Globals.save_config()
+
+func _on_music_pressed():
+	var bMute=AudioServer.is_bus_mute(Globals.BGM_IDX)
+	AudioServer.set_bus_mute(Globals.BGM_IDX,!bMute)
+	if bMute:
+		music.text="Music:  ON"
+	else:
+		music.text="Music:  OFF"
+	Globals.save_config()
+		
+
+
+func _on_sfx_pressed():
+	var bMute=AudioServer.is_bus_mute(Globals.SFX_IDX)
+	AudioServer.set_bus_mute(Globals.SFX_IDX,!bMute)
+	if bMute:
+		sfx.text="SFX:  ON"
+	else:
+		sfx.text="SFX:  OFF"
+	Globals.save_config()
+
+
+func _on_rounds_pressed():
+	if Globals.round_set==1:
+		Globals.round_set=10
+	else:
+		Globals.round_set=1
+	rounds.text="Rounds: "+str(Globals.round_set)
+	Globals.save_config()

@@ -1,0 +1,72 @@
+# LANGUAGE translation for 1030 for the following files:
+# res://ui/menu.tscn
+#
+# FIRST AUTHOR < EMAIL @ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1030\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+
+#: ui/menu.tscn
+msgid "GET  24"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "Start"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "Option"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "Best Records"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "Quit"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "Rounds:"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "1          4          7          10"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "          training   competition"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "Music:  OFF"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "Language:  "
+msgstr ""
+
+#: ui/menu.tscn
+msgid "Chinese"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "English"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "Back"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "Drag to add, subtract, multiply, and divide.\nProduced by dabuwhy@qq.com"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "Best record in 10 rounds"
+msgstr ""

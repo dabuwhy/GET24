@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://pxu8xbh0ogq"]
+
+[ext_resource type="Script" path="res://operator.gd" id="1_k576y"]
+
+[sub_resource type="TextMesh" id="TextMesh_lfwl2"]
+resource_local_to_scene = true
+text = "+"
+
+[node name="operator" type="Node2D"]
+script = ExtResource("1_k576y")
+opColor = Color(0.87451, 0.427451, 0.333333, 1)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(3, 7)
+scale = Vector2(600, 600)
+mesh = SubResource("TextMesh_lfwl2")

@@ -1,0 +1,213 @@
+[gd_scene load_steps=11 format=3 uid="uid://cb28ik1tjd0ca"]
+
+[ext_resource type="Theme" uid="uid://k8y8ag1ldtm2" path="res://ui/menu.tres" id="1_l6l68"]
+[ext_resource type="Script" path="res://ui/menu.gd" id="2_7qfis"]
+[ext_resource type="Shader" path="res://ui/menu.gdshader" id="2_yl35a"]
+[ext_resource type="FontFile" uid="uid://cpif825jimjoo" path="res://res/orange juice 2.0.ttf" id="4_p0b6q"]
+[ext_resource type="AudioStream" uid="uid://dc1gi0w38b5fj" path="res://res/audio/click.ogg" id="5_a72ju"]
+[ext_resource type="Script" path="res://ui/ClickSound.gd" id="6_yht4a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fnlh1"]
+shader = ExtResource("2_yl35a")
+shader_parameter/bg_color = Color(0, 0, 0.270588, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pukwj"]
+font = ExtResource("4_p0b6q")
+font_size = 120
+font_color = Color(0.960784, 0, 0.203922, 1)
+outline_size = 2
+outline_color = Color(0.819608, 0.164706, 0.164706, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_ip35g"]
+
+[sub_resource type="FontVariation" id="FontVariation_dyrtc"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchor_left = -0.997
+anchor_right = 1.994
+anchor_bottom = 1.0
+offset_left = -3.15997
+offset_right = 3.32007
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_l6l68")
+script = ExtResource("2_7qfis")
+
+[node name="star" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fnlh1")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.333
+anchor_right = 0.668
+anchor_bottom = 1.0
+offset_left = 0.719971
+offset_right = -2.88013
+mouse_filter = 1
+color = Color(1, 1, 1, 0)
+
+[node name="Head" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.267
+offset_bottom = -0.360016
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Head"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -35.5
+offset_right = 95.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "GET  24"
+label_settings = SubResource("LabelSettings_pukwj")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchor_top = 0.267
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.360016
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="mainMenu" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.333
+anchor_right = 0.668
+anchor_bottom = 1.0
+offset_left = 1.71997
+offset_right = -1.88013
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="Control/mainMenu"]
+layout_mode = 2
+text = "Start"
+flat = true
+
+[node name="Option" type="Button" parent="Control/mainMenu"]
+layout_mode = 2
+text = "Option"
+flat = true
+
+[node name="BestRecords" type="Button" parent="Control/mainMenu"]
+layout_mode = 2
+text = "Best Records"
+flat = true
+
+[node name="Quit" type="Button" parent="Control/mainMenu"]
+layout_mode = 2
+text = "Quit"
+flat = true
+
+[node name="Label" type="Label" parent="Control/mainMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("FontVariation_ip35g")
+theme_override_font_sizes/font_size = 30
+text = "Drag to add, subtract, multiply, and divide.
+Produced by dabuwhy@qq.com"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="optionMenu" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.667
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.279907
+
+[node name="Rounds" type="Button" parent="Control/optionMenu"]
+layout_mode = 2
+text = "Rounds:  1"
+flat = true
+
+[node name="Music" type="Button" parent="Control/optionMenu"]
+layout_mode = 2
+text = "Music:  ON"
+flat = true
+
+[node name="SFX" type="Button" parent="Control/optionMenu"]
+layout_mode = 2
+text = "SFX:  ON"
+flat = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/optionMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="Control/optionMenu/HBoxContainer2"]
+layout_mode = 2
+text = "Language:  "
+
+[node name="OptionButton" type="OptionButton" parent="Control/optionMenu/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("1_l6l68")
+flat = true
+item_count = 2
+selected = 0
+popup/item_0/text = "Chinese"
+popup/item_0/id = 0
+popup/item_1/text = "English"
+popup/item_1/id = 1
+
+[node name="Back" type="Button" parent="Control/optionMenu"]
+layout_mode = 2
+text = "Back"
+flat = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.333
+anchor_bottom = 1.0
+offset_right = 0.719971
+
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Best record in 10 rounds"
+horizontal_alignment = 1
+
+[node name="leaderboard" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("FontVariation_dyrtc")
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+flat = true
+
+[node name="Control" type="Control" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.12
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_a72ju")
+volume_db = -15.0
+bus = &"SFX"
+script = ExtResource("6_yht4a")
+
+[connection signal="pressed" from="Control/mainMenu/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/mainMenu/Option" to="." method="_on_option_pressed"]
+[connection signal="pressed" from="Control/mainMenu/BestRecords" to="." method="_on_leaderboard_pressed"]
+[connection signal="pressed" from="Control/mainMenu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Control/optionMenu/Rounds" to="." method="_on_rounds_pressed"]
+[connection signal="pressed" from="Control/optionMenu/Music" to="." method="_on_music_pressed"]
+[connection signal="pressed" from="Control/optionMenu/SFX" to="." method="_on_sfx_pressed"]
+[connection signal="item_selected" from="Control/optionMenu/HBoxContainer2/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="Control/optionMenu/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Back" to="." method="_on_back_pressed"]

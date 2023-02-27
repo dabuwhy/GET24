@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://q6d7sglqurgr"]
+
+[ext_resource type="Script" path="res://globals.gd" id="1_r8s66"]
+[ext_resource type="Shader" path="res://globals.gdshader" id="2_gd68c"]
+[ext_resource type="AudioStream" uid="uid://bu1rtv4x7qp4s" path="res://res/audio/joshua-mclean_air.ogg" id="3_edblh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k8r05"]
+shader = ExtResource("2_gd68c")
+shader_parameter/cutoff = 1.0
+shader_parameter/feather = 0.2
+
+[sub_resource type="Animation" id="Animation_e52t2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_e4gam"]
+resource_name = "fade-in"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_higls"]
+_data = {
+"RESET": SubResource("Animation_e52t2"),
+"fade-in": SubResource("Animation_e4gam")
+}
+
+[node name="Globals" type="Node2D"]
+script = ExtResource("1_r8s66")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_k8r05")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0.290196, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_higls")
+}
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("3_edblh")
+volume_db = -15.0
+bus = &"BGM"
+
+[connection signal="finished" from="BGM" to="." method="_on_bgm_finished"]
