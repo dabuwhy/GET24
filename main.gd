@@ -8,13 +8,13 @@ extends Node2D
 var beInRects=[]
 var beAddRect=null
 var collision1Rect=4
-
+var initPos=[Vector2(102,384),Vector2(416,384),Vector2(102,808),Vector2(416,808)]
 func _init():
-	Globals.reloadOnce=true
 	pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Globals.reloadOnce=true
 	var rects=[]
 	rects.append($Number)
 	rects.append($Number2)
@@ -25,21 +25,21 @@ func _ready():
 	var now={}
 	for r in rects:
 		r.MergeNumber.connect(hud.revokeAbled)
+		r.collision_layer=1
 		Globals.rectNumber[r]=Globals.numbers[i]
 		Globals.nameRect[r.name]=r
 		r.num=str(Globals.numbers[i])
+		Globals.moveToShow(r,Vector2(295,-38),initPos[i])
+		now[r.name]=[r.num,initPos[i],r.collision_layer]
 		i+=1
-		now[r.name]=[r.num,r.position,r.collision_layer]
 	Globals.history.push_back(now)
 	Globals.historyIndex=0
 #	print(rects)
 #	print(Globals.rectNumber)
-	Globals.moveToShow($Number,Vector2(295,-38),Vector2(102,384))
-	Globals.moveToShow($Number2,Vector2(295,-38),Vector2(416,384))
-	Globals.moveToShow($Number3,Vector2(295,-38),Vector2(102,808))
-	Globals.moveToShow($Number4,Vector2(295,-38),Vector2(416,808))
+
 	label.text="Round  "+str(Globals.round_index)
-#	label.scale=Vector2.ZERO
+	label.modulate=Color(1,1,1,1)
+	label.scale=Vector2.ZERO
 	var tween=get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property($HUD/HBoxContainer/Label,"theme_override_colors/font_color",Color(1,1,1,1),2)
 	tween.parallel().tween_property(label,"scale",Vector2.ONE,1)
@@ -56,7 +56,9 @@ func nextRound(rect):
 	else:
 		Globals.restart()
 		Globals.round_index+=1
-		get_tree().reload_current_scene()
+#		get_tree().reload_current_scene()
+		_ready()
+		$HUD._ready()
 func win():
 	var spendt=int(Time.get_unix_time_from_system()-Globals.started_at)
 	label.text="     %d:%02d"%[spendt/60,spendt%60]
@@ -74,7 +76,9 @@ func win():
 	await tween.finished
 	Globals.restart()
 	Globals.started_at=Time.get_unix_time_from_system()
-	get_tree().reload_current_scene()
+#	get_tree().reload_current_scene()
+	_ready()
+	$HUD._ready()
 func compareLeaderboard(spendt):
 	Globals.leaderboard[spendt]=Time.get_date_string_from_system()+" "+Time.get_time_string_from_system()
 	if Globals.leaderboard.size()>6:
