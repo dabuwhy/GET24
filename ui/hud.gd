@@ -18,6 +18,8 @@ func _ready():
 		conti.disabled=true
 	restart.disabled=true
 	ans.text=""
+	popup_panel.size.x=get_viewport().get_visible_rect().size.x
+	ans.size.x=get_viewport().get_visible_rect().size.x
 	popup_panel.size.y=100
 	ans.size.y=100
 	for k in Globals.solution:
