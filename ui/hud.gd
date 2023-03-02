@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var time = $time
 @onready var ans = $PopupPanel/Label
 @onready var popup_panel = $PopupPanel
+@onready var restart = $HBoxContainer/restart
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,11 +16,14 @@ func _ready():
 		pause.disabled=true
 		revoke.disabled=true
 		conti.disabled=true
-		$HBoxContainer/solution.disabled=true
-	else:
-		ans.text=""
-		for k in Globals.solution:
-			ans.text+=Globals.solution[k]+'\n'
+	restart.disabled=true
+	ans.text=""
+	popup_panel.size.y=100
+	ans.size.y=100
+	for k in Globals.solution:
+		ans.text+=Globals.solution[k]+'\n'
+	await get_tree().create_timer(2.5).timeout
+	restart.disabled=false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -28,7 +32,9 @@ func _process(delta):
 	pass
 func _on_restart_pressed():
 	Globals.restart()
-	get_tree().reload_current_scene()
+#	get_tree().reload_current_scene()
+	_ready()
+	get_parent()._ready()
 
 func _on_pause_pressed():
 	color_rect.visible=true
@@ -37,7 +43,7 @@ func _on_pause_pressed():
 	conti.disabled=true
 	color_rect.mouse_filter=Control.MOUSE_FILTER_STOP
 	var tween=get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property(color_rect,"modulate",Color(1,1,1,1),1)
+	tween.tween_property(color_rect,"modulate",Color(1,1,1,1),0.5)
 	await tween.finished
 	Globals.pause_sec=Time.get_unix_time_from_system()-Globals.started_at
 	get_tree().paused=true
@@ -46,13 +52,15 @@ func _on_continue_pressed():
 	get_tree().paused=false
 	Globals.started_at=Time.get_unix_time_from_system()-Globals.pause_sec
 	pause.visible=true
+	pause.disabled=true
 	conti.visible=false
 	color_rect.mouse_filter=Control.MOUSE_FILTER_PASS
 	var tween=get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property(color_rect,"modulate",Color(1,1,1,0),1)
+	tween.tween_property(color_rect,"modulate",Color(1,1,1,0),0.5)
 	await tween.finished
 #	tween.kill()
 	color_rect.visible=false
+	pause.disabled=false
 func revokeAbled():
 	if Globals.historyIndex>0:
 		revoke.disabled=false
@@ -107,6 +115,7 @@ func _on_menu_pressed():
 
 func _on_solution_pressed():
 	popup_panel.visible=true
+	
 
 
 func _on_label_gui_input(event):
@@ -114,3 +123,10 @@ func _on_label_gui_input(event):
 		|| (event is InputEventScreenTouch && event.pressed):
 		popup_panel.visible=false
 
+
+
+func _on_popup_panel_popup_hide():
+	if Globals.round_set>=10:
+		Globals.restart()
+		get_parent()._ready()
+		self._ready()

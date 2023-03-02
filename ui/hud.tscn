@@ -171,18 +171,17 @@ texture_hover = ExtResource("15_w51a3")
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
 position = Vector2i(0, 200)
-size = Vector2i(720, 99)
+size = Vector2i(720, 100)
 theme = ExtResource("16_mtjkn")
 
 [node name="Label" type="Label" parent="PopupPanel"]
 offset_right = 720.0
-offset_bottom = 99.0
+offset_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 mouse_filter = 0
 mouse_force_pass_scroll_events = false
 theme_override_fonts/font = SubResource("FontVariation_dbae7")
-text = "1+1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -194,4 +193,5 @@ vertical_alignment = 1
 [connection signal="pressed" from="HBoxContainer/pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="HBoxContainer/continue" to="." method="_on_continue_pressed"]
 [connection signal="visibility_changed" from="HBoxContainer/continue" to="." method="_on_continue_visibility_changed"]
+[connection signal="popup_hide" from="PopupPanel" to="." method="_on_popup_panel_popup_hide"]
 [connection signal="gui_input" from="PopupPanel/Label" to="." method="_on_label_gui_input"]

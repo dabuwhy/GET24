@@ -25,8 +25,8 @@ window/size/viewport_width=720
 window/size/viewport_height=1440
 window/size/extend_to_title=true
 window/handheld/orientation=1
-window/stretch/mode="canvas_items"
-window/stretch/aspect="ignore"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [internationalization]
 

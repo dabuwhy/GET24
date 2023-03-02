@@ -25,7 +25,8 @@ func _ready():
 		sfx.text="SFX:  OFF"
 	else:
 		sfx.text="SFX:  ON"
-		
+	if OS.get_name()=="iOS":
+		$Control/mainMenu/Quit.visible=false
 
 
 func _on_start_pressed():
@@ -37,6 +38,7 @@ func _on_start_pressed():
 #	get_tree().get_root().add_child(mainScene)
 func _on_quit_pressed():
 	get_tree().quit()
+	get_tree().get_root().propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 	
 
 func _on_leaderboard_pressed():
@@ -48,7 +50,7 @@ func _on_leaderboard_pressed():
 func _on_back_pressed():
 	var tween=get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property(control,"anchor_left",0,0.5)
-	tween.parallel().tween_property(control,"anchor_right",1,0.5)
+	tween.parallel().tween_property(control,"anchor_right",1.001,0.5)
 
 
 func _on_option_pressed():

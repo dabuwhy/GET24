@@ -14,50 +14,69 @@ shader_parameter/NUM_EXPLOSIONS = 4.0
 shader_parameter/NUM_PARTICLES = 20.0
 shader_parameter/MOD3 = Vector3(0.1031, 0.11369, 0.13787)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_iu1gi")
 
 [node name="Fireworks" type="ColorRect" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_y46ya")
-anchors_preset = 9
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 720.0
-offset_bottom = 1440.0
+grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="Sky" type="TextureRect" parent="."]
-offset_right = 720.0
-offset_bottom = 1440.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_kprfd")
+metadata/_edit_use_anchors_ = true
 
 [node name="Number" parent="." instance=ExtResource("2_soi1b")]
-position = Vector2(102, 384)
+position = Vector2(80, 384)
 
 [node name="Number2" parent="." instance=ExtResource("2_soi1b")]
-position = Vector2(416, 384)
+position = Vector2(400, 384)
 
 [node name="Number3" parent="." instance=ExtResource("2_soi1b")]
-position = Vector2(102, 808)
+position = Vector2(80, 808)
 
 [node name="Number4" parent="." instance=ExtResource("2_soi1b")]
-position = Vector2(416, 808)
+position = Vector2(400, 808)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="Label" type="Label" parent="."]
-offset_left = 230.0
-offset_top = 198.0
-offset_right = 521.0
-offset_bottom = 292.0
-scale = Vector2(1e-05, 1e-05)
-pivot_offset = Vector2(120, 42)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.22
+offset_bottom = 0.199982
+grow_horizontal = 2
+pivot_offset = Vector2(376, 206)
 theme = ExtResource("6_3updi")
 theme_override_colors/font_color = Color(0.807843, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.694118, 0.47451, 0, 1)
 theme_override_font_sizes/font_size = 90
 text = "Round  1"
-vertical_alignment = 1
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="HUD" parent="." instance=ExtResource("5_ajlhs")]
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
