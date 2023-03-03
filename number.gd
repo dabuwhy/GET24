@@ -98,7 +98,7 @@ func _on_input_event(viewport, event, shape_idx):
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	self.label.text=num
 	if !isMoving:
 		inScreenPos=self.position.clamp(Vector2.ZERO,get_viewport_rect().size-$CollisionShape2D.shape.size)
@@ -135,7 +135,7 @@ func _on_area_entered(area):
 	pass # Replace with function body.
 
 
-func _on_area_exited(area):
+func _on_area_exited(_area):
 	beIn=false
 	beSelect=false
 	for o in operators:

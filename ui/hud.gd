@@ -8,35 +8,37 @@ extends CanvasLayer
 @onready var time = $time
 @onready var ans = $PopupPanel/Label
 @onready var popup_panel = $PopupPanel
-@onready var restart = $HBoxContainer/restart
+@onready var restartButton = $HBoxContainer/restart
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if Globals.round_set>=10:
 		pause.disabled=true
-		revoke.disabled=true
-		conti.disabled=true
-	restart.disabled=true
-	ans.text=""
 	popup_panel.size.x=get_viewport().get_visible_rect().size.x
 	ans.size.x=get_viewport().get_visible_rect().size.x
+	restart()
+	
+func restart():
+	revoke.disabled=true
+	conti.disabled=true
+	restartButton.disabled=true
 	popup_panel.size.y=100
 	ans.size.y=100
+	ans.text=""
 	for k in Globals.solution:
 		ans.text+=Globals.solution[k]+'\n'
 	await get_tree().create_timer(2.5).timeout
-	restart.disabled=false
-
+	restartButton.disabled=false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	var now:int=Time.get_unix_time_from_system()-Globals.started_at
 	time.text="%02d:%02d"%[now/60,now%60]
 	pass
 func _on_restart_pressed():
 	Globals.restart()
 #	get_tree().reload_current_scene()
-	_ready()
-	get_parent()._ready()
+	self.restart()
+	get_parent().restart()
 
 func _on_pause_pressed():
 	color_rect.visible=true
@@ -130,5 +132,5 @@ func _on_label_gui_input(event):
 func _on_popup_panel_popup_hide():
 	if Globals.round_set>=10:
 		Globals.restart()
-		get_parent()._ready()
-		self._ready()
+		get_parent().restart()
+		self.restart()

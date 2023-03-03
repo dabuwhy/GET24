@@ -73,11 +73,6 @@ offset_right = -20.0
 offset_bottom = -21.84
 grow_horizontal = 2
 
-[node name="Control5" type="Control" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-
 [node name="solution" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
@@ -88,7 +83,7 @@ texture_disabled = ExtResource("5_8e6dt")
 [node name="Control6" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 6.0
 
 [node name="revoke" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
@@ -114,7 +109,7 @@ flip_h = true
 [node name="Control" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 7.0
+size_flags_stretch_ratio = 2.0
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
@@ -130,7 +125,6 @@ vertical_alignment = 1
 [node name="Control2" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 12.0
 
 [node name="restart" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
