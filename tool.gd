@@ -14,7 +14,7 @@ func _process(delta):
 
 
 func _on_line_edit_text_changed(new_text):
-	var a:PackedStringArray=new_text.split(' ',false)
+	var a:PackedStringArray=new_text.split('.',false)
 	if a.size()==4:
 		button.disabled=false
 		Globals.numbers.clear()
