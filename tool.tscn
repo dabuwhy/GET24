@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu2kc2eivy16e"]
+
+[ext_resource type="Texture2D" uid="uid://by870b7q378n2" path="res://res/sky.jpg" id="1_xos6j"]
+[ext_resource type="Theme" uid="uid://k8y8ag1ldtm2" path="res://ui/menu.tres" id="2_p27fs"]
+[ext_resource type="Script" path="res://tool.gd" id="2_p163d"]
+
+[sub_resource type="FontVariation" id="FontVariation_yppif"]
+
+[node name="Tool" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_p27fs")
+script = ExtResource("2_p163d")
+
+[node name="Sky" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xos6j")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.025
+anchor_right = 0.975
+anchor_bottom = 0.975
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_p27fs")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0.34902, 0.34902, 0.34902, 1)
+theme_override_font_sizes/font_size = 100
+placeholder_text = "1-2-3-4"
+caret_blink = true
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Calculate"
+
+[node name="Control2" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+size_flags_stretch_ratio = 20.0
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+theme = ExtResource("2_p27fs")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_yppif")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="text_changed" from="VBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

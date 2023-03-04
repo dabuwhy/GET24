@@ -11,10 +11,10 @@ var collision1Rect=4
 var initPos=[Vector2(80,384),Vector2(400,384),Vector2(80,808),Vector2(400,808)]
 var rects=[]
 func _notification(what):
-	if what==MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN || what==MainLoop.NOTIFICATION_APPLICATION_RESUMED:
+	if what==MainLoop.NOTIFICATION_APPLICATION_RESUMED || what==Node.NOTIFICATION_WM_WINDOW_FOCUS_IN:
 		Globals.started_at=Time.get_unix_time_from_system()-Globals.pause_sec
 		get_tree().paused=false
-	elif what==MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT|| what==MainLoop.NOTIFICATION_APPLICATION_PAUSED:
+	elif what==MainLoop.NOTIFICATION_APPLICATION_PAUSED || what==Node.NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 		Globals.pause_sec=Time.get_unix_time_from_system()-Globals.started_at
 		get_tree().paused=true
 func _init():
@@ -95,7 +95,7 @@ func win():
 	$HUD.restart()
 func compareLeaderboard(spendt):
 	Globals.leaderboard[spendt]=Time.get_date_string_from_system()+" "+Time.get_time_string_from_system()
-	if Globals.leaderboard.size()>6:
+	if Globals.leaderboard.size()>7:
 		var erase=[spendt]
 		for k in Globals.leaderboard.keys():
 			if spendt<k:

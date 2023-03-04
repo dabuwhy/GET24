@@ -92,3 +92,15 @@ msgstr "10局赛最佳纪录\n(最大数≥13)"
 #: ui/menu.tscn
 msgid "MAX NUM: "
 msgstr "最大数： "
+
+#: ui/menu.tscn
+msgid "24 Calculator"
+msgstr "24计算器"
+
+#: tool.tscn
+msgid "Calculate"
+msgstr "计算"
+
+#: tool.tscn
+msgid "No Answer"
+msgstr "无解"

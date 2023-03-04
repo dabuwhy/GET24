@@ -20,6 +20,7 @@ var round_index:int=1
 var round_set:int=1
 var leaderboard={}
 var reloadOnce=true
+var maxInt:int=13
 var musics=[preload("res://res/audio/joshua-mclean_air.ogg"),
 	preload("res://res/audio/joshua-mclean_dreams-left-behind.ogg"),
 	preload("res://res/audio/joshua-mclean_inner-calm.ogg"),
@@ -47,7 +48,7 @@ func Calc2Num(num1,num2,opIndex):
 	pass
 func _init():
 	load_config()
-	restart()
+#	restart()
 		
 func restart():
 	history.clear()
@@ -56,7 +57,7 @@ func restart():
 		numbers.clear()
 		randomize()
 		for i in range(4):
-			numbers.append(randi()%13+1)
+			numbers.append(randi()%maxInt+1)
 		print(numbers)
 		getAns()
 #only base types (int, float, string and the vector types) are passed by value to functions (value is copied).
@@ -208,6 +209,7 @@ func save_config():
 	file.set_value("audio","bgm_enabled",AudioServer.is_bus_mute(BGM_IDX))
 	file.set_value("audio","sfx_enabled",AudioServer.is_bus_mute(SFX_IDX))
 	file.set_value("option","language",TranslationServer.get_locale())
+	file.set_value("option","maxInt",Globals.maxInt)
 	var err=file.save(CONFIG_PATH)
 	if err!=OK:
 		push_error("Failed to save config:%d"%err)
@@ -221,6 +223,7 @@ func load_config():
 		AudioServer.set_bus_mute(BGM_IDX,file.get_value("audio","bgm_enabled",false))
 		AudioServer.set_bus_mute(SFX_IDX,file.get_value("audio","sfx_enabled",false))
 		TranslationServer.set_locale(file.get_value("option","language","zh"))
+		maxInt=file.get_value("option","maxInt",13)
 	else:
 		push_warning("Failed to load config:%d"%err)
 	

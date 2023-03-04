@@ -5,6 +5,8 @@ extends Control
 @onready var leaderboardLabel = $Control/VBoxContainer/leaderboard
 @onready var music = $Control/optionMenu/Music
 @onready var sfx = $Control/optionMenu/SFX
+@onready var max_int = $Control/optionMenu/HBoxContainer/maxInt
+@onready var h_slider = $Control/optionMenu/HBoxContainer/HSlider
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,12 +29,14 @@ func _ready():
 		sfx.text="SFX:  ON"
 	if OS.get_name()=="iOS":
 		$Control/mainMenu/Quit.visible=false
+	h_slider.value=Globals.maxInt
+	max_int.text=str(Globals.maxInt)
 
 
 func _on_start_pressed():
 	if Globals.round_set==10:
 		Globals.round_index=1
-		Globals.restart()
+	Globals.restart()
 	Globals.started_at=Time.get_unix_time_from_system()
 	Globals.go_to_world("res://main.tscn")
 #	get_tree().get_root().add_child(mainScene)
@@ -94,3 +98,18 @@ func _on_rounds_pressed():
 		Globals.round_set=1
 	rounds.text="Rounds: "+str(Globals.round_set)
 	Globals.save_config()
+
+
+func _on_h_slider_value_changed(value):
+	max_int.text=str(value)
+	Globals.maxInt=value
+	
+
+
+func _on_h_slider_drag_ended(value_changed):
+	if value_changed:
+		Globals.save_config()
+
+
+func _on_tool_pressed():
+	Globals.go_to_world("res://tool.tscn")

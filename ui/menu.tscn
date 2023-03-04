@@ -104,6 +104,11 @@ layout_mode = 2
 text = "Best Records"
 flat = true
 
+[node name="Tool" type="Button" parent="Control/mainMenu"]
+layout_mode = 2
+text = "24 Calculator"
+flat = true
+
 [node name="Quit" type="Button" parent="Control/mainMenu"]
 layout_mode = 2
 text = "Quit"
@@ -142,6 +147,37 @@ layout_mode = 2
 text = "SFX:  ON"
 flat = true
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/optionMenu"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Control/optionMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.67
+
+[node name="Label" type="Label" parent="Control/optionMenu/HBoxContainer"]
+layout_mode = 2
+text = "MAX NUM: "
+
+[node name="HSlider" type="HSlider" parent="Control/optionMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 1.51
+theme = ExtResource("1_l6l68")
+min_value = 3.0
+value = 13.0
+
+[node name="maxInt" type="Label" parent="Control/optionMenu/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "13"
+
+[node name="Control2" type="Control" parent="Control/optionMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.19
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="Control/optionMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -175,7 +211,8 @@ offset_right = 0.719971
 
 [node name="Label" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
-text = "Best record in 10 rounds"
+text = "Best record in 10 rounds
+(MAX NUM≥13)"
 horizontal_alignment = 1
 
 [node name="leaderboard" type="Label" parent="Control/VBoxContainer"]
@@ -204,10 +241,13 @@ script = ExtResource("6_yht4a")
 [connection signal="pressed" from="Control/mainMenu/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Control/mainMenu/Option" to="." method="_on_option_pressed"]
 [connection signal="pressed" from="Control/mainMenu/BestRecords" to="." method="_on_leaderboard_pressed"]
+[connection signal="pressed" from="Control/mainMenu/Tool" to="." method="_on_tool_pressed"]
 [connection signal="pressed" from="Control/mainMenu/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Control/optionMenu/Rounds" to="." method="_on_rounds_pressed"]
 [connection signal="pressed" from="Control/optionMenu/Music" to="." method="_on_music_pressed"]
 [connection signal="pressed" from="Control/optionMenu/SFX" to="." method="_on_sfx_pressed"]
+[connection signal="drag_ended" from="Control/optionMenu/HBoxContainer/HSlider" to="." method="_on_h_slider_drag_ended"]
+[connection signal="value_changed" from="Control/optionMenu/HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="item_selected" from="Control/optionMenu/HBoxContainer2/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="pressed" from="Control/optionMenu/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Back" to="." method="_on_back_pressed"]

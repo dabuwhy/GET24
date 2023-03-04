@@ -118,6 +118,8 @@ func _on_menu_pressed():
 
 
 func _on_solution_pressed():
+	popup_panel.size.y=100
+	ans.size.y=100
 	popup_panel.visible=true
 	
 
@@ -132,5 +134,5 @@ func _on_label_gui_input(event):
 func _on_popup_panel_popup_hide():
 	if Globals.round_set>=10:
 		Globals.restart()
-		get_parent().restart()
 		self.restart()
+		get_parent().restart()
