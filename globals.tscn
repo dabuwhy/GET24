@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://q6d7sglqurgr"]
+[gd_scene load_steps=8 format=3 uid="uid://033wvpndxkwn"]
 
 [ext_resource type="Script" path="res://globals.gd" id="1_r8s66"]
 [ext_resource type="Shader" path="res://globals.gdshader" id="2_gd68c"]

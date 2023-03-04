@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cu2kc2eivy16e"]
+[gd_scene load_steps=5 format=3 uid="uid://c2u40rcu10crv"]
 
 [ext_resource type="Texture2D" uid="uid://by870b7q378n2" path="res://res/sky.jpg" id="1_xos6j"]
 [ext_resource type="Theme" uid="uid://k8y8ag1ldtm2" path="res://ui/menu.tres" id="2_p27fs"]
@@ -30,7 +30,7 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.025
-anchor_top = 0.025
+anchor_top = 0.05
 anchor_right = 0.975
 anchor_bottom = 1.0
 

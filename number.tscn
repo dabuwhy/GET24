@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7hlcy533gtdm"]
+[gd_scene load_steps=6 format=3 uid="uid://dnjtjheiphs52"]
 
 [ext_resource type="Script" path="res://number.gd" id="1_37d70"]
-[ext_resource type="PackedScene" uid="uid://pxu8xbh0ogq" path="res://operator.tscn" id="1_deks1"]
+[ext_resource type="PackedScene" uid="uid://cvwcjl7kpiih6" path="res://operator.tscn" id="1_deks1"]
 [ext_resource type="Script" path="res://Area2D.gd" id="3_ht520"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xq2vc"]
