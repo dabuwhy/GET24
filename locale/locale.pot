@@ -68,5 +68,9 @@ msgid "Drag to add, subtract, multiply, and divide.\nProduced by dabuwhy@qq.com"
 msgstr ""
 
 #: ui/menu.tscn
-msgid "Best record in 10 rounds"
+msgid "Best record in 10 rounds\n(MAX NUM≥13)"
+msgstr ""
+
+#: ui/menu.tscn
+msgid "MAX NUM: "
 msgstr ""

@@ -11,10 +11,10 @@ var collision1Rect=4
 var initPos=[Vector2(80,384),Vector2(400,384),Vector2(80,808),Vector2(400,808)]
 var rects=[]
 func _notification(what):
-	if what==MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
+	if what==MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN || what==MainLoop.NOTIFICATION_APPLICATION_RESUMED:
 		Globals.started_at=Time.get_unix_time_from_system()-Globals.pause_sec
 		get_tree().paused=false
-	elif what==MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT:
+	elif what==MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT|| what==MainLoop.NOTIFICATION_APPLICATION_PAUSED:
 		Globals.pause_sec=Time.get_unix_time_from_system()-Globals.started_at
 		get_tree().paused=true
 func _init():
@@ -76,7 +76,7 @@ func nextRound(rect):
 func win():
 	var spendt=int(Time.get_unix_time_from_system()-Globals.started_at)
 	label.text=" %d:%02d"%[spendt/60,spendt%60]
-	if Globals.round_set>=10:
+	if Globals.round_set>=10&&Globals.maxInt>=13:
 		compareLeaderboard(spendt)
 	Globals.round_index=1
 	fireworks.visible=true

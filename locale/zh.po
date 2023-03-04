@@ -86,5 +86,9 @@ msgid "Drag to add, subtract, multiply, and divide.\nProduced by dabuwhy@qq.com"
 msgstr "拖动以便进行加减乘除\ndabuwhy@qq.com"
 
 #: ui/menu.tscn
-msgid "Best record in 10 rounds"
-msgstr "10局赛最佳纪录"
+msgid "Best record in 10 rounds\n(MAX NUM≥13)"
+msgstr "10局赛最佳纪录\n(最大数≥13)"
+
+#: ui/menu.tscn
+msgid "MAX NUM: "
+msgstr "最大数： "
