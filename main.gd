@@ -44,7 +44,7 @@ func restart():
 		r.collision_layer=1
 		Globals.rectNumber[r]=Globals.numbers[i]
 		r.num=str(Globals.numbers[i])
-		Globals.moveToShow(r,Vector2(0.56*get_viewport().get_visible_rect().size.x,-38),initPos[i])
+		Globals.moveToShow(r,Vector2(0.5*get_viewport().get_visible_rect().size.x,-38),initPos[i])
 		now[r.name]=[r.num,initPos[i],r.collision_layer]
 		i+=1
 	Globals.history.push_back(now)
