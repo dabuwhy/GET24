@@ -169,6 +169,7 @@ size = Vector2i(720, 100)
 theme = ExtResource("16_mtjkn")
 
 [node name="Label" type="Label" parent="PopupPanel"]
+process_mode = 3
 offset_right = 720.0
 offset_bottom = 100.0
 size_flags_horizontal = 3

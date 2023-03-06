@@ -125,7 +125,7 @@ func _on_solution_pressed():
 
 
 func _on_label_gui_input(event):
-	if (event is InputEventMouseButton && event.pressed) || event is InputEventScreenTouch :
+	if (event is InputEventMouseButton && event.pressed) || (event is InputEventScreenTouch && event.pressed) :
 		popup_panel.visible=false
 
 
