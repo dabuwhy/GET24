@@ -43,6 +43,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_kprfd")
+stretch_mode = 6
 metadata/_edit_use_anchors_ = true
 
 [node name="Number" parent="." instance=ExtResource("2_soi1b")]

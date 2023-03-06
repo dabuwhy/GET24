@@ -83,7 +83,7 @@ texture_disabled = ExtResource("5_8e6dt")
 [node name="Control6" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 6.0
+size_flags_stretch_ratio = 4.0
 
 [node name="revoke" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2

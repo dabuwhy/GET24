@@ -11,12 +11,13 @@ var collision1Rect=4
 var initPos=[Vector2(80,384),Vector2(400,384),Vector2(80,808),Vector2(400,808)]
 var rects=[]
 func _notification(what):
-	if what==MainLoop.NOTIFICATION_APPLICATION_RESUMED || what==Node.NOTIFICATION_WM_WINDOW_FOCUS_IN:
-		Globals.started_at=Time.get_unix_time_from_system()-Globals.pause_sec
-		get_tree().paused=false
-	elif what==MainLoop.NOTIFICATION_APPLICATION_PAUSED || what==Node.NOTIFICATION_WM_WINDOW_FOCUS_OUT:
-		Globals.pause_sec=Time.get_unix_time_from_system()-Globals.started_at
-		get_tree().paused=true
+	if Globals.round_set!=10:
+		if what==MainLoop.NOTIFICATION_APPLICATION_RESUMED || what==Node.NOTIFICATION_WM_WINDOW_FOCUS_IN:
+			Globals.started_at=Time.get_unix_time_from_system()-Globals.pause_sec
+			get_tree().paused=false
+		elif what==MainLoop.NOTIFICATION_APPLICATION_PAUSED || what==Node.NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+			Globals.pause_sec=Time.get_unix_time_from_system()-Globals.started_at
+			get_tree().paused=true
 func _init():
 	pass
 
