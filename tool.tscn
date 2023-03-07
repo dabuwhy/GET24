@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2u40rcu10crv"]
+[gd_scene load_steps=6 format=3 uid="uid://c2u40rcu10crv"]
 
 [ext_resource type="Texture2D" uid="uid://by870b7q378n2" path="res://res/sky.jpg" id="1_xos6j"]
 [ext_resource type="Theme" uid="uid://k8y8ag1ldtm2" path="res://ui/menu.tres" id="2_p27fs"]
 [ext_resource type="Script" path="res://tool.gd" id="2_p163d"]
+[ext_resource type="Texture2D" uid="uid://c3nmdomsd22ur" path="res://res/clear.png" id="4_uaryb"]
 
 [sub_resource type="FontVariation" id="FontVariation_yppif"]
 
@@ -51,8 +52,10 @@ theme = ExtResource("2_p27fs")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_placeholder_color = Color(0.643137, 0.643137, 0.643137, 1)
 theme_override_font_sizes/font_size = 100
+theme_override_icons/clear = ExtResource("4_uaryb")
 placeholder_text = "1.2.3.4"
 virtual_keyboard_type = 3
+clear_button_enabled = true
 caret_blink = true
 
 [node name="Control" type="Control" parent="VBoxContainer"]
