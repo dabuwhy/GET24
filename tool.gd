@@ -5,6 +5,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$VBoxContainer/LineEdit.grab_focus()
 	button.disabled=true
 
 
@@ -26,6 +27,7 @@ func _on_line_edit_text_changed(new_text):
 
 func _on_button_pressed():
 	showAnswer()
+	
 func _on_line_edit_text_submitted(new_text):
 	showAnswer()
 func showAnswer():
@@ -36,6 +38,8 @@ func showAnswer():
 		label.text+=Globals.solution[k]+'\n'
 	if label.text.length()==0:
 		label.text="No Answer"
+	$VBoxContainer/LineEdit.clear()
+	$VBoxContainer/LineEdit.grab_focus()
 
 
 func _on_back_pressed():
