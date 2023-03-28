@@ -89,6 +89,7 @@ func win():
 	tween.tween_property(sky,"modulate",Color(1,1,1,1),1)
 	tween.parallel().tween_property(label,"modulate",Color(1,1,1,0),0.5)
 	await tween.finished
+	fireworks.visible=false
 	Globals.restart()
 	Globals.started_at=Time.get_unix_time_from_system()
 #	get_tree().reload_current_scene()
