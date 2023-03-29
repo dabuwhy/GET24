@@ -8,6 +8,12 @@ extends Control
 @onready var max_int = $Control/optionMenu/HBoxContainer/maxInt
 @onready var h_slider = $Control/optionMenu/HBoxContainer/HSlider
 
+func _init():
+	if OS.get_name()!="iOS" && OS.get_name()!="Android":
+		DisplayServer.window_set_size(Vector2i(1024,768))
+#		get_window().size=Vector2i(1024,768)
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.z_index=2
