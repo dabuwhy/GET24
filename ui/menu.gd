@@ -119,3 +119,7 @@ func _on_h_slider_drag_ended(value_changed):
 
 func _on_tool_pressed():
 	Globals.go_to_world("res://tool.tscn")
+
+
+func _on_about_pressed():
+	Globals.go_to_world("res://ui/about.tscn")

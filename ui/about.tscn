@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1lhm6pktbfwc"]
+
+[ext_resource type="Script" path="res://ui/about.gd" id="1_uhk1x"]
+[ext_resource type="Texture2D" uid="uid://c2a74nhqbu48" path="res://res/sky.png" id="2_44xb8"]
+[ext_resource type="FontFile" uid="uid://cpif825jimjoo" path="res://res/orange juice 2.0.ttf" id="3_hcxyb"]
+
+[node name="About" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uhk1x")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_44xb8")
+stretch_mode = 6
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 74.0
+offset_bottom = -1174.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hcxyb")
+theme_override_font_sizes/font_size = 100
+text = "About"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 276.0
+offset_bottom = -594.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hcxyb")
+theme_override_font_sizes/font_size = 70
+text = "Drag to add, subtract, multiply, and divide.
+
+For any suggestions, please contact dabuwhy@qq.com"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 962.0
+offset_bottom = -356.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hcxyb")
+theme_override_font_sizes/font_size = 80
+text = "Back"
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

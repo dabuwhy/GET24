@@ -109,6 +109,11 @@ layout_mode = 2
 text = "24 Calculator"
 flat = true
 
+[node name="About" type="Button" parent="Control/mainMenu"]
+layout_mode = 2
+text = "About"
+flat = true
+
 [node name="Quit" type="Button" parent="Control/mainMenu"]
 layout_mode = 2
 text = "Quit"
@@ -119,7 +124,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = SubResource("FontVariation_ip35g")
 theme_override_font_sizes/font_size = 30
-text = "Drag to add, subtract, multiply, and divide.
+text = "
 Produced by dabuwhy@qq.com"
 horizontal_alignment = 2
 vertical_alignment = 2
@@ -242,6 +247,7 @@ script = ExtResource("6_yht4a")
 [connection signal="pressed" from="Control/mainMenu/Option" to="." method="_on_option_pressed"]
 [connection signal="pressed" from="Control/mainMenu/BestRecords" to="." method="_on_leaderboard_pressed"]
 [connection signal="pressed" from="Control/mainMenu/Tool" to="." method="_on_tool_pressed"]
+[connection signal="pressed" from="Control/mainMenu/About" to="." method="_on_about_pressed"]
 [connection signal="pressed" from="Control/mainMenu/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Control/optionMenu/Rounds" to="." method="_on_rounds_pressed"]
 [connection signal="pressed" from="Control/optionMenu/Music" to="." method="_on_music_pressed"]

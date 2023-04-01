@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://c2u40rcu10crv"]
 
-[ext_resource type="Texture2D" uid="uid://by870b7q378n2" path="res://res/sky.jpg" id="1_xos6j"]
 [ext_resource type="Theme" uid="uid://k8y8ag1ldtm2" path="res://ui/menu.tres" id="2_p27fs"]
 [ext_resource type="Script" path="res://tool.gd" id="2_p163d"]
+[ext_resource type="Texture2D" uid="uid://c2a74nhqbu48" path="res://res/sky.png" id="3_f48fp"]
 [ext_resource type="Texture2D" uid="uid://c3nmdomsd22ur" path="res://res/clear.png" id="4_uaryb"]
 
 [sub_resource type="FontVariation" id="FontVariation_yppif"]
@@ -24,7 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_xos6j")
+texture = ExtResource("3_f48fp")
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

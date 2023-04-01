@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://main.gd" id="1_iu1gi"]
 [ext_resource type="PackedScene" uid="uid://dnjtjheiphs52" path="res://number.tscn" id="2_soi1b"]
 [ext_resource type="Shader" path="res://fireworks.gdshader" id="3_45um2"]
-[ext_resource type="Texture2D" uid="uid://by870b7q378n2" path="res://res/sky.jpg" id="3_kprfd"]
+[ext_resource type="Texture2D" uid="uid://c2a74nhqbu48" path="res://res/sky.png" id="3_75l2s"]
 [ext_resource type="PackedScene" uid="uid://c0fbopu1qbxkp" path="res://ui/hud.tscn" id="5_ajlhs"]
 [ext_resource type="Theme" uid="uid://k8y8ag1ldtm2" path="res://ui/menu.tres" id="6_3updi"]
 
@@ -42,7 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_kprfd")
+texture = ExtResource("3_75l2s")
 stretch_mode = 6
 metadata/_edit_use_anchors_ = true
 

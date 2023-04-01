@@ -13,7 +13,8 @@ config_version=5
 config/name="get24"
 run/main_scene="res://ui/menu.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://res/number-24.png"
+config/windows_native_icon="res://res/number-24.png"
 
 [autoload]
 
