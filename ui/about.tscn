@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1lhm6pktbfwc"]
+[gd_scene load_steps=5 format=3 uid="uid://d1lhm6pktbfwc"]
 
+[ext_resource type="Theme" uid="uid://k8y8ag1ldtm2" path="res://ui/menu.tres" id="1_rjiqf"]
 [ext_resource type="Script" path="res://ui/about.gd" id="1_uhk1x"]
 [ext_resource type="Texture2D" uid="uid://c2a74nhqbu48" path="res://res/sky.png" id="2_44xb8"]
 [ext_resource type="FontFile" uid="uid://cpif825jimjoo" path="res://res/orange juice 2.0.ttf" id="3_hcxyb"]
@@ -11,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_rjiqf")
 script = ExtResource("1_uhk1x")
 
 [node name="TextureRect" type="TextureRect" parent="."]

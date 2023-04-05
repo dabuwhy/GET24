@@ -13,6 +13,7 @@ config_version=5
 config/name="get24"
 run/main_scene="res://ui/menu.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
+boot_splash/show_image=false
 config/icon="res://res/number-24.png"
 config/windows_native_icon="res://res/number-24.png"
 
@@ -24,10 +25,12 @@ Globals="*res://globals.tscn"
 
 window/size/viewport_width=720
 window/size/viewport_height=1440
+window/size/initial_position_type=0
+window/size/initial_position=Vector2i(10, 50)
 window/size/extend_to_title=true
-window/handheld/orientation=1
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/handheld/orientation=1
 
 [input_devices]
 

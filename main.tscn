@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://fireworks.gdshader" id="3_45um2"]
 [ext_resource type="Texture2D" uid="uid://c2a74nhqbu48" path="res://res/sky.png" id="3_75l2s"]
 [ext_resource type="PackedScene" uid="uid://c0fbopu1qbxkp" path="res://ui/hud.tscn" id="5_ajlhs"]
-[ext_resource type="Theme" uid="uid://k8y8ag1ldtm2" path="res://ui/menu.tres" id="6_3updi"]
+[ext_resource type="FontFile" uid="uid://cpif825jimjoo" path="res://res/orange juice 2.0.ttf" id="5_dspx5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y46ya"]
 shader = ExtResource("3_45um2")
@@ -69,9 +69,9 @@ anchor_bottom = 0.22
 offset_bottom = 0.199982
 grow_horizontal = 2
 pivot_offset = Vector2(376, 206)
-theme = ExtResource("6_3updi")
 theme_override_colors/font_color = Color(0.807843, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.694118, 0.47451, 0, 1)
+theme_override_fonts/font = ExtResource("5_dspx5")
 theme_override_font_sizes/font_size = 90
 text = "Round  1"
 horizontal_alignment = 1

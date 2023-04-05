@@ -10,7 +10,7 @@ extends Control
 
 func _init():
 	if OS.get_name()!="iOS" && OS.get_name()!="Android":
-		DisplayServer.window_set_size(Vector2i(1024,768))
+		DisplayServer.window_set_size(Vector2i(500,700))
 #		get_window().size=Vector2i(1024,768)
 
 

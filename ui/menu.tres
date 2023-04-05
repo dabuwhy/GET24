@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=11 format=3 uid="uid://k8y8ag1ldtm2"]
 
-[ext_resource type="FontFile" uid="uid://cpif825jimjoo" path="res://res/orange juice 2.0.ttf" id="1_5f4pr"]
 [ext_resource type="Texture2D" uid="uid://i7ihwmr1wjkh" path="res://res/red_circle.png" id="2_unte6"]
+[ext_resource type="FontFile" uid="uid://j0lh7ks8ncv0" path="res://res/MiSans-Regular.ttf" id="3_1aelk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eyt07"]
 content_margin_left = 4.0
@@ -82,6 +82,7 @@ bg_color = Color(0.0156863, 0.0470588, 0.360784, 1)
 bg_color = Color(0.301961, 0.682353, 0.360784, 1)
 
 [resource]
+default_font = ExtResource("3_1aelk")
 default_font_size = 50
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
@@ -99,7 +100,7 @@ Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
 Button/constants/h_separation = 2
 Button/constants/outline_size = 0
 Button/font_sizes/font_size = 70
-Button/fonts/font = ExtResource("1_5f4pr")
+Button/fonts/font = ExtResource("3_1aelk")
 Button/styles/disabled = SubResource("StyleBoxFlat_eyt07")
 Button/styles/focus = SubResource("StyleBoxFlat_sbc4i")
 Button/styles/hover = SubResource("StyleBoxFlat_bt4j4")
@@ -108,7 +109,7 @@ Button/styles/pressed = SubResource("StyleBoxFlat_6ao12")
 HSlider/icons/grabber = ExtResource("2_unte6")
 HSlider/icons/grabber_highlight = ExtResource("2_unte6")
 Label/font_sizes/font_size = 70
-Label/fonts/font = ExtResource("1_5f4pr")
+Label/fonts/font = ExtResource("3_1aelk")
 PopupMenu/styles/hover = SubResource("StyleBoxFlat_g7sqr")
 PopupMenu/styles/panel = SubResource("StyleBoxFlat_i6yug")
 PopupPanel/styles/panel = SubResource("StyleBoxFlat_6wv5c")

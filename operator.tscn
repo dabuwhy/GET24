@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvwcjl7kpiih6"]
+[gd_scene load_steps=4 format=3 uid="uid://cvwcjl7kpiih6"]
 
 [ext_resource type="Script" path="res://operator.gd" id="1_k576y"]
+[ext_resource type="FontFile" uid="uid://j0lh7ks8ncv0" path="res://res/MiSans-Regular.ttf" id="2_ory1y"]
 
 [sub_resource type="TextMesh" id="TextMesh_lfwl2"]
 resource_local_to_scene = true
 text = "+"
+font = ExtResource("2_ory1y")
 
 [node name="operator" type="Node2D"]
 script = ExtResource("1_k576y")
