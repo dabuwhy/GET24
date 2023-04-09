@@ -40,8 +40,7 @@ func _ready():
 
 
 func _on_start_pressed():
-	if Globals.round_set==10:
-		Globals.round_index=1
+	Globals.round_index=1
 	Globals.restart()
 	Globals.started_at=Time.get_unix_time_from_system()
 	Globals.go_to_world("res://main.tscn")
