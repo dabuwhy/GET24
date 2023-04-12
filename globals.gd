@@ -222,7 +222,7 @@ func load_config():
 		leaderboard=file.get_value("leaderboard","leaderboard",{})
 		AudioServer.set_bus_mute(BGM_IDX,file.get_value("audio","bgm_enabled",false))
 		AudioServer.set_bus_mute(SFX_IDX,file.get_value("audio","sfx_enabled",false))
-		TranslationServer.set_locale(file.get_value("option","language","zh"))
+		TranslationServer.set_locale(file.get_value("option","language",OS.get_locale_language()))
 		maxInt=file.get_value("option","maxInt",13)
 	else:
 		push_warning("Failed to load config:%d"%err)

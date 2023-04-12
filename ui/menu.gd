@@ -25,6 +25,8 @@ func _ready():
 		leaderboardLabel.text+="%d:%02d    \t"%[k/60,k%60]+Globals.leaderboard[k]+'\n'
 	if TranslationServer.get_locale()=="en":
 		$Control/optionMenu/HBoxContainer2/OptionButton.select(1)
+	else:
+		$Control/optionMenu/HBoxContainer2/OptionButton.select(0)
 	if AudioServer.is_bus_mute(Globals.BGM_IDX):
 		music.text="Music:  OFF"
 	else:
