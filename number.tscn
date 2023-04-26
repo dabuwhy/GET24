@@ -14,7 +14,7 @@ size = Vector2(240, 240)
 script = ExtResource("1_37d70")
 
 [node name="operator" parent="." instance=ExtResource("1_deks1")]
-modulate = Color(1, 1, 1, 0.431373)
+modulate = Color(1, 1, 1, 0.6)
 position = Vector2(60, 60)
 
 [node name="operator2" parent="." instance=ExtResource("1_deks1")]

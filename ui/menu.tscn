@@ -84,8 +84,9 @@ anchors_preset = -1
 anchor_left = 0.333
 anchor_right = 0.668
 anchor_bottom = 1.0
-offset_left = 1.71997
-offset_right = -1.88013
+offset_left = 5.71997
+offset_right = -5.88
+offset_bottom = 0.119995
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -135,7 +136,8 @@ anchors_preset = -1
 anchor_left = 0.667
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 0.279907
+offset_left = 4.27991
+offset_bottom = 0.119995
 
 [node name="Rounds" type="Button" parent="Control/optionMenu"]
 layout_mode = 2
@@ -220,7 +222,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.333
 anchor_bottom = 1.0
-offset_right = 1.71997
+offset_right = -0.280029
 offset_bottom = -0.880005
 
 [node name="Label" type="Label" parent="Control/VBoxContainer"]
