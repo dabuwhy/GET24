@@ -136,8 +136,7 @@ anchors_preset = -1
 anchor_left = 0.667
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.27991
-offset_bottom = 0.119995
+offset_left = 6.0
 
 [node name="Rounds" type="Button" parent="Control/optionMenu"]
 layout_mode = 2
@@ -222,7 +221,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.333
 anchor_bottom = 1.0
-offset_right = -0.280029
+offset_right = -6.0
 offset_bottom = -0.880005
 
 [node name="Label" type="Label" parent="Control/VBoxContainer"]

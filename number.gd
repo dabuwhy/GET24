@@ -17,6 +17,7 @@ var operators=[]
 var otherRect=null
 var dir=Vector2.ZERO
 var inScreenPos=Vector2.ZERO
+var touchIndex=0
 func _init():
 	pass
 
@@ -31,7 +32,7 @@ func _ready():
 func _unhandled_input(event):
 	if isMoving:
 		if (event is InputEventMouseButton &&!event.pressed && event.button_index==MOUSE_BUTTON_LEFT) \
-			|| (event is InputEventScreenTouch && !event.pressed):
+			|| (event is InputEventScreenTouch && !event.pressed && event.index==touchIndex):
 			if beAdd:
 				var res=Globals.Calc2Num(Globals.rectNumber[Globals.beSelectRect],Globals.rectNumber[self],Globals.operatorIndex)
 				if res>=0:
@@ -60,10 +61,10 @@ func _unhandled_input(event):
 #			print(isMoving)
 			number.monitorable=false
 			self.monitorable=true
-		elif event is InputEventMouseMotion || event is InputEventScreenDrag:	
+		elif event is InputEventMouseMotion || (event is InputEventScreenDrag && event.index==touchIndex):	
 			self.position=event.position-relPos
 	else:
-		if event is InputEventMouseMotion || event is InputEventScreenDrag:
+		if event is InputEventMouseMotion || (event is InputEventScreenDrag && event.index==touchIndex):
 			if beIn && beSelect:
 				if otherRect.global_position.x<self.position.x:
 					Globals.operatorIndex=0
@@ -94,7 +95,8 @@ func _on_input_event(viewport, event, shape_idx):
 		number.monitorable=true
 		number.z_index=3
 		relPos=event.position-self.position
-	
+		if event is InputEventScreenTouch:
+			touchIndex=event.index
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
