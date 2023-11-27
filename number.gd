@@ -140,7 +140,7 @@ func _process(_delta):
 			self.monitoring=true
 #			self.monitorable=true
 
-
+#many can be in,but only one can be select
 func _on_area_entered(area):
 #	print("_on_area_entered",area)
 	
