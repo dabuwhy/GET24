@@ -101,6 +101,7 @@ func nextRound(rect):
 		if Globals.pkMode:
 			Globals.numbers=Globals.pkNumbers[Globals.round_index-1]
 			Globals.solution=Globals.pkSolutions[Globals.round_index-1]
+			Globals.history.clear()
 		else:
 			Globals.restart()
 		restart()
