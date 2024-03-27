@@ -7,10 +7,13 @@ extends Control
 @onready var sfx = $Control/optionMenu/SFX
 @onready var max_int = $Control/optionMenu/HBoxContainer/maxInt
 @onready var h_slider = $Control/optionMenu/HBoxContainer/HSlider
-
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		get_tree().quit() # default behavior
+		
 func _init():
 	if OS.get_name()!="iOS" && OS.get_name()!="Android":
-		DisplayServer.window_set_size(Vector2i(500,700))
+		DisplayServer.window_set_size(Vector2i(450,900))
 #		get_window().size=Vector2i(1024,768)
 
 
@@ -42,14 +45,14 @@ func _ready():
 
 
 func _on_start_pressed():
+	Globals.pkMode=false
 	Globals.round_index=1
-	Globals.restart()
 	Globals.started_at=Time.get_unix_time_from_system()
 	Globals.go_to_world("res://main.tscn")
+	Globals.restart()
 #	get_tree().get_root().add_child(mainScene)
 func _on_quit_pressed():
-	get_tree().quit()
-	get_tree().get_root().propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 	
 
 func _on_leaderboard_pressed():
@@ -124,3 +127,10 @@ func _on_tool_pressed():
 
 func _on_about_pressed():
 	Globals.go_to_world("res://ui/about.tscn")
+
+
+func _on_pk_pressed() -> void:
+	Globals.pkMode=true
+	Globals.round_index=1
+	Globals.started_at=Time.get_unix_time_from_system()
+	Globals.go_to_world("res://ui/pk.tscn")

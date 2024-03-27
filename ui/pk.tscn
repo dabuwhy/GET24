@@ -1,0 +1,191 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3i3ot08h77nh"]
+
+[ext_resource type="Theme" uid="uid://k8y8ag1ldtm2" path="res://ui/menu.tres" id="1_mmmpa"]
+[ext_resource type="Script" path="res://ui/pk.gd" id="1_qohmc"]
+[ext_resource type="Shader" path="res://ui/menu.gdshader" id="3_qkesv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jbpln"]
+shader = ExtResource("3_qkesv")
+shader_parameter/bg_color = Color(0, 0, 0.270588, 1)
+
+[node name="pk" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_mmmpa")
+script = ExtResource("1_qohmc")
+
+[node name="star" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_jbpln")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+color = Color(1, 1, 1, 0)
+
+[node name="Label" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(360, 109)
+mouse_filter = 1
+
+[node name="Title" type="Label" parent="Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 71.0
+offset_bottom = -1253.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Waiting for client join"
+
+[node name="Dot" type="Label" parent="Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 187.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+autowrap_mode = 3
+
+[node name="My" type="SubViewportContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+
+[node name="MyViewport" type="SubViewport" parent="My"]
+process_mode = 3
+handle_input_locally = false
+physics_object_picking = true
+size = Vector2i(720, 720)
+render_target_update_mode = 0
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="My/MyViewport"]
+_spawnable_scenes = PackedStringArray("res://main.tscn")
+spawn_path = NodePath("..")
+spawn_limit = 1
+
+[node name="Your" type="SubViewportContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="YourViewport" type="SubViewport" parent="Your"]
+process_mode = 3
+handle_input_locally = false
+physics_object_picking = true
+size = Vector2i(720, 720)
+render_target_update_mode = 0
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Your/YourViewport"]
+_spawnable_scenes = PackedStringArray("res://main.tscn")
+spawn_path = NodePath("..")
+spawn_limit = 1
+
+[node name="menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="menu"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="Title" type="Label" parent="menu"]
+layout_mode = 2
+mouse_filter = 1
+text = "PK Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="menu"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="Host" type="Button" parent="menu"]
+layout_mode = 2
+mouse_filter = 1
+text = "Host"
+flat = true
+
+[node name="Join" type="Button" parent="menu"]
+layout_mode = 2
+mouse_filter = 1
+text = "Join"
+flat = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menu"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.67
+
+[node name="Label" type="Label" parent="menu/HBoxContainer"]
+layout_mode = 2
+text = "Rounds:"
+
+[node name="HSlider" type="HSlider" parent="menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 1.51
+theme = ExtResource("1_mmmpa")
+min_value = 1.0
+value = 10.0
+
+[node name="maxInt" type="Label" parent="menu/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "10"
+
+[node name="Control2" type="Control" parent="menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.19
+
+[node name="Back" type="Button" parent="menu"]
+layout_mode = 2
+mouse_filter = 1
+text = "Back"
+flat = true
+
+[node name="Control5" type="Control" parent="menu"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+
+[connection signal="spawned" from="My/MyViewport/MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
+[connection signal="spawned" from="Your/YourViewport/MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
+[connection signal="pressed" from="menu/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="menu/Join" to="." method="_on_join_pressed"]
+[connection signal="drag_ended" from="menu/HBoxContainer/HSlider" to="." method="_on_h_slider_drag_ended"]
+[connection signal="value_changed" from="menu/HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="menu/Back" to="." method="_on_back_pressed"]

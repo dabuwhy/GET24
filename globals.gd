@@ -1,6 +1,8 @@
 extends Node2D
 @onready var globalAnimation = $AnimationPlayer
 @onready var color_rect = $CanvasLayer/ColorRect
+signal genSolution
+
 const CONFIG_PATH="user://settings.cfg"
 const BGM_IDX=1
 const SFX_IDX=2
@@ -11,16 +13,21 @@ var beSelectRect=null   #a bug ,not consider touch can multi beAdd rects
 var operatorIndex:=0
 var history:=[]
 var historyIndex:=0
-var solution={}
+var solution={}:
+	set(v):
+		solution=v
+		genSolution.emit()
 var solKey=[0,0,0,0,0]
 var operatorMap={0:'+',1:'-',2:'×',3:'÷'}
 var started_at:float=Time.get_unix_time_from_system()
 var pause_sec:float=0
 var round_index:int=1
+var peer_round:int=1
 var round_set:int=1
 var leaderboard={}
 var reloadOnce=true
 var maxInt:int=13
+var aniTime:float=0.5
 var musics=[preload("res://res/audio/joshua-mclean_air.ogg"),
 	preload("res://res/audio/joshua-mclean_dreams-left-behind.ogg"),
 	preload("res://res/audio/joshua-mclean_inner-calm.ogg"),
@@ -28,6 +35,9 @@ var musics=[preload("res://res/audio/joshua-mclean_air.ogg"),
 	preload("res://res/audio/joshua-mclean_the-well-traveled-path.ogg"),
 	preload("res://res/audio/joshua-mclean_shes-all-I-need.ogg")]
 var musicIndex=randi()%musics.size()
+var pkMode:bool=false
+var pkNumbers=[]
+var pkSolutions=[]
 func Calc2Num(num1,num2,opIndex):
 	if opIndex==0:
 		return num1+num2
@@ -49,7 +59,19 @@ func Calc2Num(num1,num2,opIndex):
 func _init():
 	load_config()
 #	restart()
-		
+func genPkSubject():
+	pkNumbers.clear()
+	pkSolutions.clear()
+	for j in range(Globals.round_set-1):
+		restart()
+		pkNumbers.append(numbers.duplicate(true))
+		pkSolutions.append(solution.duplicate(true))
+	restart()
+	pkNumbers.insert(0,numbers)
+	pkSolutions.insert(0,solution)
+	print(pkNumbers)
+	print(pkSolutions)
+	
 func restart():
 	history.clear()
 	solution.clear()
@@ -109,6 +131,7 @@ func generateSolution(a,b,c,d,i,j,k):
 	solKey[j]+=1
 	solKey[k]+=1
 	solution[solKey]=s
+	
 func threeFloorTree(ANums,index):
 #	print(ANums,index)
 	for order in index:
@@ -179,13 +202,13 @@ func moveTo(rect,from,to):
 		var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 		tween.tween_property(rect, "position", to, 1)
 func moveToShow(rect,from,to):
-	rect.modulate=Color(1,1,1,0.5)
+	rect.modulate=Color(1,1,1,aniTime)
 	rect.scale=Vector2(0,0)
 	rect.position=from+Vector2(100,100)
 	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property(rect, "modulate", Color(1,1,1,1), 1)
-	tween.parallel().tween_property(rect, "scale", Vector2(1,1), 1)
-	tween.parallel().tween_property(rect, "position", to, 1)
+	tween.tween_property(rect, "modulate", Color(1,1,1,1), aniTime)
+	tween.parallel().tween_property(rect, "scale", Vector2(1,1), aniTime)
+	tween.parallel().tween_property(rect, "position", to, aniTime)
 	await tween.finished
 	if rect!=null:
 		rect.collision_layer=1
@@ -197,9 +220,9 @@ func moveToHide(rect,from,to):
 	rect.scale=Vector2(1,1)
 	rect.position=from
 	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property(rect, "modulate", Color(1,1,1,0.5), 0.5)
-	tween.parallel().tween_property(rect, "scale", Vector2(0,0), 0.5)
-	tween.parallel().tween_property(rect, "position", to+Vector2(100,100), 0.5)
+	tween.tween_property(rect, "modulate", Color(1,1,1,0.5), aniTime)
+	tween.parallel().tween_property(rect, "scale", Vector2(0,0), aniTime)
+	tween.parallel().tween_property(rect, "position", to+Vector2(100,100), aniTime)
 #	tween.parallel().tween_property(rect, "rotation", 2*PI, 1)
 #	tween.tween_callback(rect.queue_free)
 func save_config():

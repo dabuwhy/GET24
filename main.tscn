@@ -5,7 +5,6 @@
 [ext_resource type="Shader" path="res://fireworks.gdshader" id="3_45um2"]
 [ext_resource type="Texture2D" uid="uid://c2a74nhqbu48" path="res://res/sky.png" id="3_75l2s"]
 [ext_resource type="PackedScene" uid="uid://c0fbopu1qbxkp" path="res://ui/hud.tscn" id="5_ajlhs"]
-[ext_resource type="FontFile" uid="uid://cpif825jimjoo" path="res://res/orange juice 2.0.ttf" id="5_dspx5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y46ya"]
 shader = ExtResource("3_45um2")
@@ -14,7 +13,15 @@ shader_parameter/NUM_EXPLOSIONS = 4.0
 shader_parameter/NUM_PARTICLES = 20.0
 shader_parameter/MOD3 = Vector3(0.1031, 0.11369, 0.13787)
 
-[node name="Main" type="Control"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_m1sks"]
+properties/0/path = NodePath("Label:text")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("rounds:text")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="1" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,16 +53,16 @@ texture = ExtResource("3_75l2s")
 stretch_mode = 6
 metadata/_edit_use_anchors_ = true
 
-[node name="Number" parent="." instance=ExtResource("2_soi1b")]
+[node name="Number0" parent="." instance=ExtResource("2_soi1b")]
 position = Vector2(80, 384)
 
-[node name="Number2" parent="." instance=ExtResource("2_soi1b")]
+[node name="Number1" parent="." instance=ExtResource("2_soi1b")]
 position = Vector2(400, 384)
 
-[node name="Number3" parent="." instance=ExtResource("2_soi1b")]
+[node name="Number2" parent="." instance=ExtResource("2_soi1b")]
 position = Vector2(80, 808)
 
-[node name="Number4" parent="." instance=ExtResource("2_soi1b")]
+[node name="Number3" parent="." instance=ExtResource("2_soi1b")]
 position = Vector2(400, 808)
 
 [node name="Timer" type="Timer" parent="."]
@@ -64,17 +71,60 @@ one_shot = true
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
+anchor_top = 0.099
 anchor_right = 1.0
-anchor_bottom = 0.22
-offset_bottom = 0.199982
+anchor_bottom = 0.183
+offset_top = 0.440002
+offset_right = -344.0
+offset_bottom = -0.52002
 grow_horizontal = 2
-pivot_offset = Vector2(376, 206)
+pivot_offset = Vector2(376, 52)
 theme_override_colors/font_color = Color(0.807843, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.694118, 0.47451, 0, 1)
-theme_override_fonts/font = ExtResource("5_dspx5")
 theme_override_font_sizes/font_size = 90
-text = "Round  1"
+text = "局:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="rounds" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.099
+anchor_right = 1.0
+anchor_bottom = 0.183
+offset_left = 372.0
+offset_top = 0.439987
+offset_bottom = 0.47998
+grow_horizontal = 2
+pivot_offset = Vector2(4, 52)
+theme_override_colors/font_color = Color(0.807843, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.694118, 0.47451, 0, 1)
+theme_override_font_sizes/font_size = 90
+text = "1"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
 
 [node name="HUD" parent="." instance=ExtResource("5_ajlhs")]
+
+[node name="time" parent="HUD" index="1"]
+anchor_right = 1.0
+anchor_bottom = 0.099
+offset_left = 0.0
+offset_top = 0.0
+offset_right = -580.0
+offset_bottom = 0.439987
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" parent="HUD" index="2"]
+anchor_bottom = 0.099
+offset_left = 140.0
+offset_top = 0.0
+offset_right = -11.0
+offset_bottom = 0.439987
+grow_vertical = 2
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_m1sks")
+
+[editable path="HUD"]

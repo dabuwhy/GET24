@@ -95,6 +95,11 @@ layout_mode = 2
 text = "Start"
 flat = true
 
+[node name="Pk" type="Button" parent="Control/mainMenu"]
+layout_mode = 2
+text = "PK Mode"
+flat = true
+
 [node name="Option" type="Button" parent="Control/mainMenu"]
 layout_mode = 2
 text = "Option"
@@ -197,7 +202,6 @@ layout_mode = 2
 theme = ExtResource("1_l6l68")
 flat = true
 item_count = 2
-selected = 0
 popup/item_0/text = "Chinese"
 popup/item_0/id = 0
 popup/item_1/text = "English"
@@ -255,6 +259,7 @@ bus = &"SFX"
 script = ExtResource("6_yht4a")
 
 [connection signal="pressed" from="Control/mainMenu/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/mainMenu/Pk" to="." method="_on_pk_pressed"]
 [connection signal="pressed" from="Control/mainMenu/Option" to="." method="_on_option_pressed"]
 [connection signal="pressed" from="Control/mainMenu/BestRecords" to="." method="_on_leaderboard_pressed"]
 [connection signal="pressed" from="Control/mainMenu/Tool" to="." method="_on_tool_pressed"]

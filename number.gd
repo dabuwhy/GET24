@@ -20,7 +20,8 @@ var inScreenPos=Vector2.ZERO
 var touchIndex=-1
 func _init():
 	pass
-
+func _enter_tree() -> void:
+	set_multiplayer_authority(get_parent().name.to_int())
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -75,24 +76,25 @@ func MovingNum():
 		for o in operators:
 			o.modulate=Color(1,1,1,0.6)
 func _unhandled_input(event):
-	if OS.get_name()=="iOS" || OS.get_name()=="Android":
-		if self.isMoving:
-			if event is InputEventScreenTouch && !event.pressed && event.index==self.touchIndex:
-				releasedOrBeIn()
-			elif event is InputEventScreenDrag && event.index==self.touchIndex:	
-				self.position=event.position-relPos
+	if is_multiplayer_authority():
+		if OS.get_name()=="iOS" || OS.get_name()=="Android":
+			if self.isMoving:
+				if event is InputEventScreenTouch && !event.pressed && event.index==self.touchIndex:
+					releasedOrBeIn()
+				elif event is InputEventScreenDrag && event.index==self.touchIndex:	
+					self.position=event.position-relPos
+			else:
+				if event is InputEventScreenDrag:
+					MovingNum()
 		else:
-			if event is InputEventScreenDrag:
-				MovingNum()
-	else:
-		if self.isMoving:
-			if event is InputEventMouseButton &&!event.pressed && event.button_index==MOUSE_BUTTON_LEFT:
-				releasedOrBeIn()
-			elif event is InputEventMouseMotion:	
-				self.position=event.position-relPos
-		else:
-			if event is InputEventMouseMotion:
-				MovingNum()
+			if self.isMoving:
+				if event is InputEventMouseButton &&!event.pressed && event.button_index==MOUSE_BUTTON_LEFT:
+					releasedOrBeIn()
+				elif event is InputEventMouseMotion:	
+					self.position=event.position-relPos
+			else:
+				if event is InputEventMouseMotion:
+					MovingNum()
 			
 func chosen(event):
 	self.monitorable=false
@@ -106,16 +108,18 @@ func chosen(event):
 	relPos=event.position-self.position
 	
 func _on_input_event(viewport, event, shape_idx):
-	if OS.get_name()=="iOS" || OS.get_name()=="Android":
-		if event is InputEventScreenTouch && event.pressed:
+	if is_multiplayer_authority():
+		if OS.get_name()=="iOS" || OS.get_name()=="Android":
+			if event is InputEventScreenTouch && event.pressed:
+				#print(event)
+				#print(self.position,self.global_position)
+				chosen(event)
+				#print(event.position,self.position)
+				self.touchIndex=event.index
+		else:
 			#print(event)
-			#print(self.position,self.global_position)
-			chosen(event)
-			print(event.position,self.position)
-			self.touchIndex=event.index
-	else:
-		if event is InputEventMouseButton && event.pressed && event.button_index==MOUSE_BUTTON_LEFT:
-			chosen(event)
+			if event is InputEventMouseButton && event.pressed && event.button_index==MOUSE_BUTTON_LEFT:
+				chosen(event)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

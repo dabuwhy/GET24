@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c0fbopu1qbxkp"]
+[gd_scene load_steps=18 format=3 uid="uid://c0fbopu1qbxkp"]
 
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_wge0f"]
 [ext_resource type="Shader" path="res://sky.gdshader" id="2_m7fc1"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://c00fdryd8us3m" path="res://res/solution_grey.png" id="5_8e6dt"]
 [ext_resource type="Texture2D" uid="uid://dddl27muc7l1y" path="res://res/revoke_black.png" id="6_4bobi"]
 [ext_resource type="Texture2D" uid="uid://d2bva1nwq8ces" path="res://res/revoke_grey.png" id="7_ie24v"]
+[ext_resource type="Texture2D" uid="uid://6haccvppydpl" path="res://res/restart_grey.png" id="8_4i16s"]
 [ext_resource type="Texture2D" uid="uid://ck1q0t5p8nrjv" path="res://res/restart_black.png" id="8_okqa1"]
+[ext_resource type="Texture2D" uid="uid://mj3ppxys0cst" path="res://res/menu_grey.png" id="10_3ms6x"]
 [ext_resource type="Texture2D" uid="uid://ck8m21ggrv6ut" path="res://res/menu_black.png" id="10_je82m"]
 [ext_resource type="Texture2D" uid="uid://cn0fleb1wufmr" path="res://res/pause_black.png" id="12_dx67f"]
 [ext_resource type="Texture2D" uid="uid://b0v1hh5ctrv44" path="res://res/pause_grey.png" id="13_bxq3e"]
@@ -124,6 +126,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 4
 texture_normal = ExtResource("8_okqa1")
+texture_disabled = ExtResource("8_4i16s")
 
 [node name="Control3" type="Control" parent="HBoxContainer"]
 layout_mode = 2
@@ -134,6 +137,7 @@ size_flags_stretch_ratio = 2.0
 layout_mode = 2
 size_flags_vertical = 4
 texture_normal = ExtResource("10_je82m")
+texture_disabled = ExtResource("10_3ms6x")
 
 [node name="Control4" type="Control" parent="HBoxContainer"]
 layout_mode = 2

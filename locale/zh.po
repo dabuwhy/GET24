@@ -1,11 +1,11 @@
-# LANGUAGE translation for 1030 for the following files:
+# LANGUAGE translation for get24 for the following files:
 # res://ui/menu.tscn
 #
 # FIRST AUTHOR < EMAIL @ADDRESS>, 2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1030\n"
+"Project-Id-Version: get24\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,6 +20,47 @@ msgstr "得到  24"
 #: ui/menu.tscn
 msgid "Start"
 msgstr "开始"
+
+#: ui/menu.tscn
+msgid "PK Mode"
+msgstr "对战模式"
+
+#: ui/pk.tscn
+msgid "PK Mode"
+msgstr "对战模式"
+
+#: ui/pk.tscn
+msgid "Host"
+msgstr "创建服务器"
+
+#: ui/pk.tscn
+msgid "Join"
+msgstr "加入服务器"
+
+#: ui/pk.tscn
+msgid "Rounds:"
+msgstr "局数:"
+
+#: ui/pk.tscn
+msgid "Back"
+msgstr "返回"
+
+#: ui/pk.tscn
+msgid "Waiting for client join"
+msgstr "等待客户加入中"
+
+
+#: main.tscn
+msgid "Server:"
+msgstr "主机:"
+
+#: main.tscn
+msgid "Client:"
+msgstr "客户:"
+
+#: main.tscn
+msgid "Round:"
+msgstr "局:"
 
 #: ui/menu.tscn
 msgid "Option"
@@ -82,10 +123,6 @@ msgid "Back"
 msgstr "返回"
 
 #: ui/menu.tscn
-msgid "Drag to add, subtract, multiply, and divide.\nProduced by dabuwhy@qq.com"
-msgstr "拖动以便进行加减乘除\ndabuwhy@qq.com"
-
-#: ui/menu.tscn
 msgid "Best record in 10 rounds\n(MAX NUM≥13)"
 msgstr "10局赛最佳纪录\n(最大数≥13)"
 
@@ -104,3 +141,20 @@ msgstr "计算"
 #: tool.tscn
 msgid "No Answer"
 msgstr "无解"
+
+#: ui/menu.tscn
+msgid "About"
+msgstr "关于"
+
+#: ui/about.tscn
+msgid "Back"
+msgstr "返回"
+
+#: ui/about.tscn
+msgid "About"
+msgstr "关于"
+
+#: ui/about.tscn
+msgid "Drag to add, subtract, multiply, and divide.\nPK mode needs to be on the same WiFi.\nFor any suggestions, please contact dabuwhy@qq.com"
+msgstr "拖动以便进行加减乘除.\n对战模式需在同一WiFi下.\n有任何建议请联系dabuwhy@qq.com"
+

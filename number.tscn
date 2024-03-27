@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnjtjheiphs52"]
+[gd_scene load_steps=7 format=3 uid="uid://dnjtjheiphs52"]
 
 [ext_resource type="Script" path="res://number.gd" id="1_37d70"]
 [ext_resource type="PackedScene" uid="uid://cvwcjl7kpiih6" path="res://operator.tscn" id="1_deks1"]
@@ -9,6 +9,26 @@ radius = 47.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bugim"]
 size = Vector2(240, 240)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2l5aa"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:scale")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:modulate")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:num")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:monitoring")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:monitorable")
+properties/5/spawn = true
+properties/5/replication_mode = 1
 
 [node name="Number" type="Area2D"]
 script = ExtResource("1_37d70")
@@ -60,6 +80,9 @@ vertical_alignment = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(120, 120)
 shape = SubResource("RectangleShape2D_bugim")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_2l5aa")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
