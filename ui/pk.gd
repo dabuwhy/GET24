@@ -31,6 +31,7 @@ func _ready() -> void:
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	set_process(false)
 	Globals.round_index=1
+	Globals.history.clear()
 func _exit_tree() -> void:
 	print("_exit_tree ",peer.get_unique_id())
 	if multiplayer.is_server():
