@@ -76,7 +76,7 @@ func MovingNum():
 		for o in operators:
 			o.modulate=Color(1,1,1,0.6)
 func _unhandled_input(event):
-	if is_multiplayer_authority():
+	if (!Globals.pkMode)||is_multiplayer_authority():
 		if OS.get_name()=="iOS" || OS.get_name()=="Android":
 			if self.isMoving:
 				if event is InputEventScreenTouch && !event.pressed && event.index==self.touchIndex:
@@ -108,7 +108,7 @@ func chosen(event):
 	relPos=event.position-self.position
 	
 func _on_input_event(viewport, event, shape_idx):
-	if is_multiplayer_authority():
+	if (!Globals.pkMode)||is_multiplayer_authority():
 		if OS.get_name()=="iOS" || OS.get_name()=="Android":
 			if event is InputEventScreenTouch && event.pressed:
 				#print(event)

@@ -3,8 +3,9 @@ extends Control
 @onready var sky = $Sky
 @onready var fireworks = $Fireworks
 @onready var hud = $HUD
-@onready var label = $Label
-@onready var rounds: Label = $rounds
+@onready var label = $Label/Label
+@onready var rounds: Label = $Label/rounds
+@onready var labels: Control = $Label
 
 var beInRects=[]
 var beAddRect=null
@@ -12,7 +13,7 @@ var collision1Rect=4
 var initPos=[Vector2(80,384),Vector2(400,384),Vector2(80,808),Vector2(400,808)]
 var rects=[]
 func _notification(what):
-	if Globals.round_set!=10:
+	if (!Globals.pkMode)&&Globals.round_set!=10:
 		if what==MainLoop.NOTIFICATION_APPLICATION_RESUMED || what==Node.NOTIFICATION_WM_WINDOW_FOCUS_IN:
 			Globals.started_at=Time.get_unix_time_from_system()-Globals.pause_sec
 			get_tree().paused=false
@@ -42,13 +43,13 @@ func _ready():
 	rects.append($Number1)
 	rects.append($Number2)
 	rects.append($Number3)
-	if (is_multiplayer_authority()):
+	if (!Globals.pkMode)||is_multiplayer_authority():
 		for r in rects:
 			r.MergeNumber.connect(hud.revokeAbled)
 			Globals.nameRect[r.name]=r
 	restart()
 func restart():
-	if (is_multiplayer_authority()):
+	if (!Globals.pkMode)||is_multiplayer_authority():
 		Globals.reloadOnce=true
 		Globals.rectNumber.clear()
 		var now={}
@@ -68,18 +69,14 @@ func restart():
 			label.text="Server:"
 		else:
 			label.text="Client:"
-		label.modulate=Color(1,1,1,1)
-		label.scale=Vector2.ZERO
 		rounds.text=str(Globals.round_index)
-		rounds.modulate=Color(1,1,1,1)
-		rounds.scale=Vector2.ZERO
+		labels.modulate=Color(1,1,1,1)
+		labels.scale=Vector2.ZERO
 		var tween=get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 		tween.tween_property($HUD/HBoxContainer/Label,"theme_override_colors/font_color",Color(1,0,0,1),0.1)
 		tween.tween_property($HUD/HBoxContainer/Label,"theme_override_colors/font_color",Color(1,1,1,1),1.7)
-		tween.parallel().tween_property(label,"scale",Vector2.ONE,1)
-		tween.parallel().tween_property(rounds,"scale",Vector2.ONE,1)
-		tween.tween_property(label,"modulate",Color(1,1,1,0.5),0.5)
-		tween.parallel().tween_property(rounds,"modulate",Color(1,1,1,0.5),0.5)
+		tween.parallel().tween_property(labels,"scale",Vector2.ONE,1)
+		tween.tween_property(labels,"modulate",Color(1,1,1,0.5),0.5)
 		await tween.finished
 func nextRound(rect):
 	Globals.moveToHide(rect,rect.position,Vector2(0.56*get_viewport().get_visible_rect().size.x,-38))
@@ -93,6 +90,12 @@ func nextRound(rect):
 			rounds.text=" sec"
 			if Globals.round_set>=10&&Globals.maxInt>=13:
 				compareLeaderboard(spendt)
+			Globals.history.clear()
+			Globals.historyIndex=0
+			hud.revokeAbled()
+			if !Globals.pkWin:
+				whoWin.rpc(spendt,multiplayer.get_unique_id())
+				label.text="Win!"+label.text
 		else:
 			win()
 	else:
@@ -106,6 +109,12 @@ func nextRound(rect):
 			Globals.restart()
 		restart()
 		$HUD.restart()
+@rpc("authority","call_remote","reliable")
+func whoWin(secs,id)->void:
+	Globals.pkWin=true
+	print(id," call whoWin ",secs)
+	print(multiplayer.get_unique_id())
+	
 func win():
 	var spendt=Time.get_unix_time_from_system()-Globals.started_at
 	label.text=" %d:%02d"%[int(spendt/60),int(spendt)%60]
@@ -128,6 +137,7 @@ func win():
 #	get_tree().reload_current_scene()
 	restart()
 	$HUD.restart()
+
 func compareLeaderboard(spendt):
 	Globals.leaderboard[spendt]=Time.get_date_string_from_system()+" "+Time.get_time_string_from_system()
 	if Globals.leaderboard.size()>7:
@@ -138,14 +148,14 @@ func compareLeaderboard(spendt):
 		erase.sort_custom(func(a, b): return a > b)
 		Globals.leaderboard.erase(erase[0])
 		if erase[0]!=spendt:
-			rounds.text=" fast!"
+			rounds.text="fast!"
 	else:
-		rounds.text=" fast!"
+		rounds.text="fast!"
 	Globals.save_config()
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if is_multiplayer_authority():
+	if (!Globals.pkMode)||is_multiplayer_authority():
 		beInRects.clear()
 		collision1Rect=0
 		for r in Globals.rectNumber.keys():
@@ -165,11 +175,14 @@ func _process(delta):
 					nextRound(Globals.beSelectRect)
 			elif Globals.reloadOnce:
 				Globals.reloadOnce=false
+				var a=label.text
+				var b=rounds.text
+				rounds.text=""
 				label.text=str(Globals.rectNumber[Globals.beSelectRect])+" ≠ 24"
 				var tween=get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
-				tween.tween_property(label,"modulate",Color(1,1,1,1),0.5)
-				tween.tween_property(label,"modulate",Color(1,1,1,1),1)
-				tween.tween_property(label,"modulate",Color(1,1,1,0),0.5)
+				tween.tween_property(labels,"modulate",Color(1,1,1,1),3)
+				tween.tween_property(label,"text",a,0)
+				tween.tween_property(rounds,"text",b,0)
 				
 		if beInRects.size()>1:
 			var minLen=INF

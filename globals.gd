@@ -38,6 +38,8 @@ var musicIndex=randi()%musics.size()
 var pkMode:bool=false
 var pkNumbers=[]
 var pkSolutions=[]
+var pkCId:int=0
+var pkWin:bool=false
 func Calc2Num(num1,num2,opIndex):
 	if opIndex==0:
 		return num1+num2

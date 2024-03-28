@@ -44,7 +44,7 @@ func _process(_delta):
 	time.text="%02d:%02d"%[now/60,now%60]
 	pass
 func _on_restart_pressed():
-	if is_multiplayer_authority():
+	if (!Globals.pkMode)||is_multiplayer_authority():
 	#	get_tree().reload_current_scene()
 		Globals.restart()
 		get_parent().restart()
@@ -100,7 +100,7 @@ func recoveryScene(previous):
 			print("recoveryScene not consider ",pre[n],now[n])
 	
 func _on_revoke_pressed():
-	if is_multiplayer_authority():
+	if (!Globals.pkMode)||is_multiplayer_authority():
 		if Globals.historyIndex>0:
 			Globals.historyIndex-=1
 			forward.disabled=false
@@ -113,7 +113,7 @@ func _on_revoke_pressed():
 
 
 func _on_forward_pressed():
-	if is_multiplayer_authority():
+	if (!Globals.pkMode)||is_multiplayer_authority():
 		if Globals.historyIndex<Globals.history.size()-1:
 			Globals.historyIndex+=1
 			revoke.disabled=false
@@ -124,12 +124,12 @@ func _on_forward_pressed():
 
 
 func _on_menu_pressed():
-	if is_multiplayer_authority():
+	if (!Globals.pkMode)||is_multiplayer_authority():
 		Globals.go_to_world("res://ui/menu.tscn")
 
 
 func _on_solution_pressed():
-	if is_multiplayer_authority():
+	if (!Globals.pkMode)||is_multiplayer_authority():
 		popup_panel.size.y=100
 		ans.size.y=100
 		popup_panel.visible=true

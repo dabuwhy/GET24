@@ -48,8 +48,9 @@ func _on_start_pressed():
 	Globals.pkMode=false
 	Globals.round_index=1
 	Globals.started_at=Time.get_unix_time_from_system()
-	Globals.go_to_world("res://main.tscn")
 	Globals.restart()
+	Globals.go_to_world("res://main.tscn")
+	
 #	get_tree().get_root().add_child(mainScene)
 func _on_quit_pressed():
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)

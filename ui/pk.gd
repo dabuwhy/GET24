@@ -12,15 +12,15 @@ var peer=ENetMultiplayerPeer.new()
 var midy=720
 var udp := PacketPeerUDP.new()
 var server := UDPServer.new()
-var cId:int=0
 var t=Time.get_unix_time_from_system()
+var preRoundSet=Globals.round_set
 func _init():
+	preRoundSet=Globals.round_set
 	OS.request_permission("INTERNET")
 	if OS.get_name()!="iOS" && OS.get_name()!="Android":
 		DisplayServer.window_set_size(Vector2i(450,900))
 	Globals.round_set=10
 func _ready() -> void:
-	multiplayer.multiplayer_peer=null
 	var s=get_viewport_rect().size
 	midy=s.y/2
 	my_viewport.size=Vector2(s.x,s.y/2)
@@ -33,15 +33,16 @@ func _ready() -> void:
 	Globals.round_index=1
 	Globals.history.clear()
 func _exit_tree() -> void:
-	print("_exit_tree ",peer.get_unique_id())
+	Globals.round_set=preRoundSet
+	print("_exit_tree ",multiplayer.get_unique_id())
 	if multiplayer.is_server():
-		multiplayer.multiplayer_peer.disconnect_peer(cId,false)
+		multiplayer.multiplayer_peer.disconnect_peer(Globals.pkCId,false)
 	else:
 		your_viewport.remove_child(your_viewport.get_child(1))
 		my_viewport.remove_child(my_viewport.get_child(1))
 		if multiplayer.multiplayer_peer!=null:
 			multiplayer.multiplayer_peer.disconnect_peer(1,false)
-	multiplayer.multiplayer_peer=null
+
 func _on_host_pressed() -> void:
 	if !label.visible:
 		peer.close()
@@ -90,16 +91,16 @@ func AddPlayer(id=1)->void:
 	if id==1:
 		my_viewport.add_child(player)
 	else:
-		cId=id
-		menu.hide()
-		Globals.started_at=Time.get_unix_time_from_system()
+		Globals.pkCId=id
 		shareSubject.rpc_id(id, Globals.pkNumbers,Globals.pkSolutions,Globals.started_at,Globals.round_set)
 		your_viewport.add_child(player)
 		Globals.round_index=1
 		await get_tree().create_timer(0.7).timeout
+		Globals.started_at=Time.get_unix_time_from_system()
 		label.hide()
 		$My.visible=true
 		$Your.visible=true
+		menu.hide()
 		print(id," join")
 @rpc("any_peer","call_remote","reliable")
 func myclose(id):
@@ -113,23 +114,25 @@ func shareSubject(numbers,solutions,started_at,rounds)->void:
 	Globals.pkSolutions=solutions
 	Globals.numbers=Globals.pkNumbers[Globals.round_index-1]
 	Globals.solution=Globals.pkSolutions[Globals.round_index-1]
-	Globals.started_at=started_at
+	#Globals.started_at=started_at
+	
 	Globals.round_set=rounds
 	Globals.genSolution.emit()
 	print("get shareSubject",numbers,solutions)
 func _on_connected_fail():
 	print("_on_connected_fail")
-	multiplayer.multiplayer_peer = null
 	$My.visible=false
 	$Your.visible=false
 	menu.show()
 func _on_connected_ok():
 	await get_tree().create_timer(0.7).timeout
+	Globals.started_at=Time.get_unix_time_from_system()
 	menu.hide()
 	$My.visible=true
 	$Your.visible=true
 func _on_join_pressed() -> void:
 	#Globals.restart()
+	server.stop()
 	peer.close()
 	Globals.round_index=1
 	set_process(true)
@@ -151,7 +154,6 @@ func _on_server_disconnected()->void:
 	$Your.visible=false
 	label.hide()
 	menu.show()
-	multiplayer.multiplayer_peer=null
 
 func _on_back_pressed() -> void:
 	Globals.go_to_world("res://ui/menu.tscn")

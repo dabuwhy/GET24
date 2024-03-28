@@ -9,6 +9,7 @@ shader = ExtResource("3_qkesv")
 shader_parameter/bg_color = Color(0, 0, 0.270588, 1)
 
 [node name="pk" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,13 +132,13 @@ mouse_filter = 1
 [node name="Host" type="Button" parent="menu"]
 layout_mode = 2
 mouse_filter = 1
-text = "Host"
+text = "I am Server"
 flat = true
 
 [node name="Join" type="Button" parent="menu"]
 layout_mode = 2
 mouse_filter = 1
-text = "Join"
+text = "I am Client"
 flat = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="menu"]

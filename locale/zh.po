@@ -30,12 +30,12 @@ msgid "PK Mode"
 msgstr "对战模式"
 
 #: ui/pk.tscn
-msgid "Host"
-msgstr "创建服务器"
+msgid "I am Server"
+msgstr "我当主机"
 
 #: ui/pk.tscn
-msgid "Join"
-msgstr "加入服务器"
+msgid "I am Client"
+msgstr "我当客户"
 
 #: ui/pk.tscn
 msgid "Rounds:"
@@ -155,6 +155,6 @@ msgid "About"
 msgstr "关于"
 
 #: ui/about.tscn
-msgid "Drag to add, subtract, multiply, and divide.\nPK mode needs to be on the same WiFi.\nFor any suggestions, please contact dabuwhy@qq.com"
-msgstr "拖动以便进行加减乘除.\n对战模式需在同一WiFi下.\n有任何建议请联系dabuwhy@qq.com"
+msgid "Drag to add, subtract, multiply, and divide.\nPK mode needs to be on the same WiFi or hotspot.\nFor any suggestions, please contact dabuwhy@qq.com"
+msgstr "拖动以便进行加减乘除.\n对战模式需在同一WiFi或者热点下.\n有任何建议请联系dabuwhy@qq.com"
 
