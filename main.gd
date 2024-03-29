@@ -87,7 +87,7 @@ func nextRound(rect):
 		if Globals.pkMode:
 			var spendt=Time.get_unix_time_from_system()-Globals.started_at
 			label.text="%.3f"%[spendt]
-			rounds.text=" sec"
+			rounds.text="sec"
 			if Globals.round_set>=10&&Globals.maxInt>=13:
 				compareLeaderboard(spendt)
 			Globals.history.clear()
@@ -95,7 +95,7 @@ func nextRound(rect):
 			hud.revokeAbled()
 			if !Globals.pkWin:
 				whoWin.rpc(spendt,multiplayer.get_unique_id())
-				label.text="Win!"+label.text
+				rounds.text+=" Win!"
 		else:
 			win()
 	else:

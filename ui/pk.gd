@@ -44,10 +44,12 @@ func _exit_tree() -> void:
 			multiplayer.multiplayer_peer.disconnect_peer(1,false)
 
 func _on_host_pressed() -> void:
+	Globals.pkWin=false
 	if !label.visible:
 		peer.close()
-		$My.set_position(Vector2(0,0))
-		$Your.set_position(Vector2(0,midy))
+		$My.set_position(Vector2(0,midy))
+		$Your.set_position(Vector2(0,0))
+		$Your.modulate=Color(0.8,0.8,0.8,1)
 		peer.create_server(SERVER_PORT)
 		multiplayer.multiplayer_peer=peer
 		multiplayer.peer_connected.connect(AddPlayer)
@@ -62,6 +64,26 @@ func _on_host_pressed() -> void:
 		set_process(true)
 		t=Time.get_unix_time_from_system()
 		#print(t,multiplayer.multiplayer_peer)
+func AddPlayer(id=1)->void:
+	var player=main.instantiate()
+	player.name=str(id)
+	if id==1:
+		while my_viewport.get_child_count()>1:
+			my_viewport.remove_child(my_viewport.get_child(1))
+			#print("remove child ",my_viewport.get_child_count())
+		my_viewport.add_child(player)
+	else:
+		Globals.pkCId=id
+		shareSubject.rpc_id(id, Globals.pkNumbers,Globals.pkSolutions,Globals.started_at,Globals.round_set)
+		your_viewport.add_child(player)
+		Globals.round_index=1
+		await get_tree().create_timer(0.7).timeout
+		Globals.started_at=Time.get_unix_time_from_system()
+		label.hide()
+		$My.visible=true
+		$Your.visible=true
+		menu.hide()
+		print(id," join")
 func _process(_delta):
 	if label.visible:
 		if Time.get_unix_time_from_system()-t>1:
@@ -85,23 +107,7 @@ func _process(_delta):
 func RemovePlayer(id=1)->void:
 	print("RemovePlayer",id)
 	your_viewport.remove_child(your_viewport.get_child(1))
-func AddPlayer(id=1)->void:
-	var player=main.instantiate()
-	player.name=str(id)
-	if id==1:
-		my_viewport.add_child(player)
-	else:
-		Globals.pkCId=id
-		shareSubject.rpc_id(id, Globals.pkNumbers,Globals.pkSolutions,Globals.started_at,Globals.round_set)
-		your_viewport.add_child(player)
-		Globals.round_index=1
-		await get_tree().create_timer(0.7).timeout
-		Globals.started_at=Time.get_unix_time_from_system()
-		label.hide()
-		$My.visible=true
-		$Your.visible=true
-		menu.hide()
-		print(id," join")
+
 @rpc("any_peer","call_remote","reliable")
 func myclose(id):
 	print("my close ",id)
@@ -131,6 +137,7 @@ func _on_connected_ok():
 	$My.visible=true
 	$Your.visible=true
 func _on_join_pressed() -> void:
+	Globals.pkWin=false
 	#Globals.restart()
 	server.stop()
 	peer.close()
@@ -143,8 +150,9 @@ func _on_join_pressed() -> void:
 		for i in range(2,255):
 			udp.set_dest_address("192.168.%d.%d"%[j,i],SERVER_PORT+1)
 			udp.put_packet("Search Host".to_utf8_buffer())
-	$My.set_position(Vector2(0,midy))
-	$Your.set_position(Vector2(0,0))
+	$My.set_position(Vector2(0,0))
+	$Your.set_position(Vector2(0,midy))
+	$My.modulate=Color(0.8,0.8,0.8,1)
 	
 func _on_server_disconnected()->void:
 	#print("_on_server_disconnected")
@@ -166,7 +174,9 @@ func _on_multiplayer_spawner_spawned(node: Node) -> void:
 func _on_h_slider_drag_ended(value_changed: bool) -> void:
 	Globals.round_set=int(max_int.text)
 
-
 func _on_h_slider_value_changed(value: float) -> void:
-	max_int.text=str(value)
-	Globals.round_set=value
+	if label.visible && multiplayer.is_server():
+		label.visible=false
+	else:
+		max_int.text=str(value)
+		Globals.round_set=value
