@@ -28,7 +28,7 @@ window/size/viewport_height=1440
 window/size/initial_position_type=0
 window/size/initial_position=Vector2i(10, 50)
 window/size/extend_to_title=true
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
 

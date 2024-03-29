@@ -78,6 +78,7 @@ offset_bottom = -0.160004
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(424, 63.56)
+mouse_filter = 1
 
 [node name="Label" type="Label" parent="Label"]
 layout_mode = 1
@@ -86,12 +87,14 @@ anchor_right = 0.7
 anchor_bottom = 1.0
 grow_horizontal = 2
 pivot_offset = Vector2(376, 52)
+mouse_filter = 1
 theme_override_colors/font_color = Color(0.807843, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.694118, 0.47451, 0, 1)
 theme_override_font_sizes/font_size = 90
 text = "Round:"
 horizontal_alignment = 2
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="rounds" type="Label" parent="Label"]
 layout_mode = 1
@@ -103,6 +106,7 @@ offset_top = -0.158001
 offset_bottom = 0.0019989
 grow_horizontal = 2
 pivot_offset = Vector2(4, 52)
+mouse_filter = 1
 theme_override_colors/font_color = Color(0.807843, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.694118, 0.47451, 0, 1)
 theme_override_font_sizes/font_size = 90
@@ -121,6 +125,7 @@ offset_right = -580.0
 offset_bottom = 0.439987
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="HBoxContainer" parent="HUD" index="2"]
 anchor_bottom = 0.099
@@ -129,6 +134,51 @@ offset_top = 0.0
 offset_right = -11.0
 offset_bottom = 0.439987
 grow_vertical = 2
+
+[node name="solution" parent="HUD/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="Control6" parent="HUD/HBoxContainer" index="1"]
+mouse_filter = 1
+
+[node name="revoke" parent="HUD/HBoxContainer" index="2"]
+mouse_filter = 1
+
+[node name="Control7" parent="HUD/HBoxContainer" index="3"]
+mouse_filter = 1
+
+[node name="forward" parent="HUD/HBoxContainer" index="4"]
+mouse_filter = 1
+
+[node name="Control" parent="HUD/HBoxContainer" index="5"]
+mouse_filter = 1
+
+[node name="Label" parent="HUD/HBoxContainer" index="6"]
+mouse_filter = 1
+
+[node name="Control2" parent="HUD/HBoxContainer" index="7"]
+mouse_filter = 1
+
+[node name="restart" parent="HUD/HBoxContainer" index="8"]
+mouse_filter = 1
+
+[node name="Control3" parent="HUD/HBoxContainer" index="9"]
+mouse_filter = 1
+
+[node name="menu" parent="HUD/HBoxContainer" index="10"]
+mouse_filter = 1
+
+[node name="Control4" parent="HUD/HBoxContainer" index="11"]
+mouse_filter = 1
+
+[node name="pause" parent="HUD/HBoxContainer" index="12"]
+mouse_filter = 1
+
+[node name="continue" parent="HUD/HBoxContainer" index="13"]
+mouse_filter = 1
+
+[node name="Label" parent="HUD/PopupPanel" index="1"]
+mouse_filter = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_m1sks")

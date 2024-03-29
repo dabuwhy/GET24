@@ -129,7 +129,6 @@ func win():
 	tween.parallel().tween_property(label,"modulate",Color(1,1,1,1),0.5)
 	tween.tween_property(sky,"modulate",Color(1,1,1,0),2)
 	tween.tween_property(sky,"modulate",Color(1,1,1,1),1)
-	tween.parallel().tween_property(label,"modulate",Color(1,1,1,0),0.5)
 	await tween.finished
 	fireworks.visible=false
 	Globals.restart()

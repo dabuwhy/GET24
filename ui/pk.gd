@@ -61,7 +61,7 @@ func _on_host_pressed() -> void:
 		server.listen(SERVER_PORT+1)
 		set_process(true)
 		t=Time.get_unix_time_from_system()
-		print(t,multiplayer.multiplayer_peer)
+		#print(t,multiplayer.multiplayer_peer)
 func _process(_delta):
 	if label.visible:
 		if Time.get_unix_time_from_system()-t>1:
@@ -147,7 +147,7 @@ func _on_join_pressed() -> void:
 	$Your.set_position(Vector2(0,0))
 	
 func _on_server_disconnected()->void:
-	print("_on_server_disconnected")
+	#print("_on_server_disconnected")
 	your_viewport.remove_child(your_viewport.get_child(1))
 	my_viewport.remove_child(my_viewport.get_child(1))
 	$My.visible=false

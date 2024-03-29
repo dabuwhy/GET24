@@ -31,6 +31,7 @@ func _ready():
 	operators.append($operator4)
 func releasedOrBeIn():
 	if beAdd:
+		MovingNum()
 		var res=Globals.Calc2Num(Globals.rectNumber[Globals.beSelectRect],Globals.rectNumber[self],Globals.operatorIndex)
 		if res>=0:
 			self.collision_layer=2
@@ -124,25 +125,26 @@ func _on_input_event(viewport, event, shape_idx):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	self.label.text=num
-	if !self.isMoving:
-		inScreenPos=self.position.clamp(Vector2.ZERO,get_viewport_rect().size-$CollisionShape2D.shape.size)
-		dir=Vector2.ZERO
-		if inScreenPos.distance_squared_to(self.position) > 4.0:
-#			self.position=self.position.lerp(inScreenPos,delta*MOVE_SPEED)
-			dir=self.position.direction_to(inScreenPos)
-		if self.monitoring && self.get_overlapping_areas().size()>0:
-			for a in self.get_overlapping_areas():
-				if a in Globals.rectNumber:
-#					print(a)
-					if a.monitorable==true:
-#						self.position=self.position.move_toward(a.position,-MOVE_SPEED)
-						dir+=a.position.direction_to(self.position)
-						break
-		if dir!=Vector2.ZERO:
-			self.position+=dir*MOVE_SPEED
-		else:
-			self.monitoring=true
-#			self.monitorable=true
+	if (!Globals.pkMode)||is_multiplayer_authority():
+		if !self.isMoving:
+			inScreenPos=self.position.clamp(Vector2.ZERO,get_viewport_rect().size-$CollisionShape2D.shape.size)
+			dir=Vector2.ZERO
+			if inScreenPos.distance_squared_to(self.position) > 4.0:
+	#			self.position=self.position.lerp(inScreenPos,delta*MOVE_SPEED)
+				dir=self.position.direction_to(inScreenPos)
+			if self.monitoring && self.get_overlapping_areas().size()>0:
+				for a in self.get_overlapping_areas():
+					if a in Globals.rectNumber:
+	#					print(a)
+						if a.monitorable==true:
+	#						self.position=self.position.move_toward(a.position,-MOVE_SPEED)
+							dir+=a.position.direction_to(self.position)
+							break
+			if dir!=Vector2.ZERO:
+				self.position+=dir*MOVE_SPEED
+			else:
+				self.monitoring=true
+	#			self.monitorable=true
 
 #many can be in,but only one can be select
 func _on_area_entered(area):

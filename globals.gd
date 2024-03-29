@@ -84,6 +84,7 @@ func restart():
 			numbers.append(randi()%maxInt+1)
 		print(numbers)
 		getAns()
+	genSolution.emit()
 #only base types (int, float, string and the vector types) are passed by value to functions (value is copied).
 #Everything else (instances, arrays, dictionaries, etc) is passed as reference.
 func c42(a:Array):
