@@ -37,8 +37,9 @@ func _exit_tree() -> void:
 	Globals.round_set=preRoundSet
 	print("_exit_tree ",multiplayer.get_unique_id())
 	if multiplayer.is_server():
-		multiplayer.multiplayer_peer.disconnect_peer(Globals.pkCId,false)
-		multiplayer.multiplayer_peer.close()
+		if multiplayer.multiplayer_peer!=null:
+			multiplayer.multiplayer_peer.disconnect_peer(Globals.pkCId,false)
+			multiplayer.multiplayer_peer.close()
 	else:
 		your_viewport.remove_child(your_viewport.get_child(1))
 		my_viewport.remove_child(my_viewport.get_child(1))
@@ -46,10 +47,11 @@ func _exit_tree() -> void:
 			multiplayer.multiplayer_peer.disconnect_peer(1,false)
 	multiplayer.multiplayer_peer=null
 func _on_host_pressed() -> void:
-	Globals.pkWin=false
-	if !label.visible:
-		label.scale=Vector2.ZERO
+	if !multiplayer.peer_connected.is_connected(AddPlayer):
+		Globals.pkWin=false
 		dot.text=""
+		label.scale=Vector2.ZERO
+		$Label/Title.text="Waiting for client join"
 		label.show()
 		peer.close()
 		$My.set_position(Vector2(0,midy))
@@ -72,6 +74,7 @@ func AddPlayer(id=1)->void:
 	player.name=str(id)
 	if id==1:
 		while my_viewport.get_child_count()>1:
+			my_viewport.get_child(1).queue_free()
 			my_viewport.remove_child(my_viewport.get_child(1))
 			#print("remove child ",my_viewport.get_child_count())
 		my_viewport.add_child(player)
@@ -109,7 +112,7 @@ func _process(_delta):
 		else:
 			print("peer.create_client error:",error)
 func RemovePlayer(id=1)->void:
-	print("RemovePlayer",id)
+	print("RemovePlayer:",id)
 	your_viewport.remove_child(your_viewport.get_child(1))
 
 @rpc("any_peer","call_remote","reliable")
@@ -154,8 +157,14 @@ func _on_join_pressed() -> void:
 		canPressJoin=false
 		Globals.pkWin=false
 		#Globals.restart()
+		while my_viewport.get_child_count()>1:
+			my_viewport.get_child(1).queue_free()
+			my_viewport.remove_child(my_viewport.get_child(1))
+		multiplayer.peer_connected.disconnect(AddPlayer)
+		if multiplayer.multiplayer_peer!=null:
+			multiplayer.multiplayer_peer.close()
+		multiplayer.multiplayer_peer=null
 		server.stop()
-		peer.close()
 		Globals.round_index=1
 		set_process(true)
 		udp.set_broadcast_enabled(true)
@@ -170,19 +179,29 @@ func _on_join_pressed() -> void:
 		$My.modulate=Color(0.75,0.75,0.75,1)
 		$Your.modulate=Color(1,1,1,1)
 		await get_tree().create_timer(2.1).timeout
+		if !server.is_listening():
+			label.scale=Vector2.ZERO
+			dot.text=""
+			$Label/Title.text="No server found\nPlease try again later"
+			label.show()
+			var tween=get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
+			tween.tween_property(label,"scale",Vector2.ONE,1)
 		canPressJoin=true
 	
 func _on_server_disconnected()->void:
-	#print("_on_server_disconnected")
-	your_viewport.remove_child(your_viewport.get_child(1))
-	my_viewport.remove_child(my_viewport.get_child(1))
+	print("_on_server_disconnected")
+	if(your_viewport.get_child_count()>1):
+		your_viewport.remove_child(your_viewport.get_child(1))
+	if(my_viewport.get_child_count()>1):
+		my_viewport.remove_child(my_viewport.get_child(1))
 	$My.visible=false
 	$Your.visible=false
 	label.hide()
 	menu.show()
-	multiplayer.multiplayer_peer.close()
+	if multiplayer.multiplayer_peer!=null:
+		multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer=null
-
+	
 func _on_back_pressed() -> void:
 	multiplayer.multiplayer_peer=null
 	Globals.go_to_world("res://ui/menu.tscn")
