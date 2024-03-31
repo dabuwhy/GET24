@@ -14,6 +14,7 @@ var udp := PacketPeerUDP.new()
 var server := UDPServer.new()
 var t=Time.get_unix_time_from_system()
 var preRoundSet=Globals.round_set
+var canPressJoin=true
 func _init():
 	preRoundSet=Globals.round_set
 	OS.request_permission("INTERNET")
@@ -47,6 +48,9 @@ func _exit_tree() -> void:
 func _on_host_pressed() -> void:
 	Globals.pkWin=false
 	if !label.visible:
+		label.scale=Vector2.ZERO
+		dot.text=""
+		label.show()
 		peer.close()
 		$My.set_position(Vector2(0,midy))
 		$Your.set_position(Vector2(0,0))
@@ -57,9 +61,6 @@ func _on_host_pressed() -> void:
 		multiplayer.peer_connected.connect(AddPlayer)
 		Globals.genPkSubject()
 		AddPlayer()
-		label.scale=Vector2.ZERO
-		dot.text=""
-		label.show()
 		var tween=get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 		tween.tween_property(label,"scale",Vector2.ONE,1)
 		server.listen(SERVER_PORT+1)
@@ -149,23 +150,27 @@ func shakeView(view)->void:
 	tween.tween_property(view,"rotation",0,0.1)
 	
 func _on_join_pressed() -> void:
-	Globals.pkWin=false
-	#Globals.restart()
-	server.stop()
-	peer.close()
-	Globals.round_index=1
-	set_process(true)
-	udp.set_broadcast_enabled(true)
-	udp.set_dest_address("255.255.255.255", SERVER_PORT+1)
-	udp.put_packet("Search Host".to_utf8_buffer())
-	for j in [0,1,43]:
-		for i in range(2,255):
-			udp.set_dest_address("192.168.%d.%d"%[j,i],SERVER_PORT+1)
-			udp.put_packet("Search Host".to_utf8_buffer())
-	$My.set_position(Vector2(0,0))
-	$Your.set_position(Vector2(0,midy))
-	$My.modulate=Color(0.75,0.75,0.75,1)
-	$Your.modulate=Color(1,1,1,1)
+	if canPressJoin:
+		canPressJoin=false
+		Globals.pkWin=false
+		#Globals.restart()
+		server.stop()
+		peer.close()
+		Globals.round_index=1
+		set_process(true)
+		udp.set_broadcast_enabled(true)
+		udp.set_dest_address("255.255.255.255", SERVER_PORT+1)
+		udp.put_packet("Search Host".to_utf8_buffer())
+		for j in [0,1,43]:
+			for i in range(2,255):
+				udp.set_dest_address("192.168.%d.%d"%[j,i],SERVER_PORT+1)
+				udp.put_packet("Search Host".to_utf8_buffer())
+		$My.set_position(Vector2(0,0))
+		$Your.set_position(Vector2(0,midy))
+		$My.modulate=Color(0.75,0.75,0.75,1)
+		$Your.modulate=Color(1,1,1,1)
+		await get_tree().create_timer(2.1).timeout
+		canPressJoin=true
 	
 func _on_server_disconnected()->void:
 	#print("_on_server_disconnected")
