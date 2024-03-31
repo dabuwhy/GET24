@@ -37,19 +37,21 @@ func _exit_tree() -> void:
 	print("_exit_tree ",multiplayer.get_unique_id())
 	if multiplayer.is_server():
 		multiplayer.multiplayer_peer.disconnect_peer(Globals.pkCId,false)
+		multiplayer.multiplayer_peer.close()
 	else:
 		your_viewport.remove_child(your_viewport.get_child(1))
 		my_viewport.remove_child(my_viewport.get_child(1))
 		if multiplayer.multiplayer_peer!=null:
 			multiplayer.multiplayer_peer.disconnect_peer(1,false)
-
+	multiplayer.multiplayer_peer=null
 func _on_host_pressed() -> void:
 	Globals.pkWin=false
 	if !label.visible:
 		peer.close()
 		$My.set_position(Vector2(0,midy))
 		$Your.set_position(Vector2(0,0))
-		$Your.modulate=Color(0.8,0.8,0.8,1)
+		$Your.modulate=Color(0.75,0.75,0.75,1)
+		$My.modulate=Color(1,1,1,1)
 		peer.create_server(SERVER_PORT)
 		multiplayer.multiplayer_peer=peer
 		multiplayer.peer_connected.connect(AddPlayer)
@@ -83,6 +85,7 @@ func AddPlayer(id=1)->void:
 		$My.visible=true
 		$Your.visible=true
 		menu.hide()
+		shakeView($My)
 		print(id," join")
 func _process(_delta):
 	if label.visible:
@@ -133,9 +136,18 @@ func _on_connected_fail():
 func _on_connected_ok():
 	await get_tree().create_timer(0.7).timeout
 	Globals.started_at=Time.get_unix_time_from_system()
-	menu.hide()
 	$My.visible=true
 	$Your.visible=true
+	menu.hide()
+	shakeView($Your)
+func shakeView(view)->void:
+	var tween=get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(view,"rotation",0.15,0.1)
+	tween.tween_property(view,"rotation",-0.12,0.1)
+	tween.tween_property(view,"rotation",0.09,0.1)
+	tween.tween_property(view,"rotation",-0.06,0.1)
+	tween.tween_property(view,"rotation",0,0.1)
+	
 func _on_join_pressed() -> void:
 	Globals.pkWin=false
 	#Globals.restart()
@@ -152,7 +164,8 @@ func _on_join_pressed() -> void:
 			udp.put_packet("Search Host".to_utf8_buffer())
 	$My.set_position(Vector2(0,0))
 	$Your.set_position(Vector2(0,midy))
-	$My.modulate=Color(0.8,0.8,0.8,1)
+	$My.modulate=Color(0.75,0.75,0.75,1)
+	$Your.modulate=Color(1,1,1,1)
 	
 func _on_server_disconnected()->void:
 	#print("_on_server_disconnected")
@@ -162,8 +175,11 @@ func _on_server_disconnected()->void:
 	$Your.visible=false
 	label.hide()
 	menu.show()
+	multiplayer.multiplayer_peer.close()
+	multiplayer.multiplayer_peer=null
 
 func _on_back_pressed() -> void:
+	multiplayer.multiplayer_peer=null
 	Globals.go_to_world("res://ui/menu.tscn")
 
 
