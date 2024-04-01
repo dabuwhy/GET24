@@ -97,7 +97,7 @@ flat = true
 
 [node name="Pk" type="Button" parent="Control/mainMenu"]
 layout_mode = 2
-text = "PK Mode"
+text = "Pair Mode"
 flat = true
 
 [node name="Option" type="Button" parent="Control/mainMenu"]
@@ -145,7 +145,7 @@ offset_left = 6.0
 
 [node name="Rounds" type="Button" parent="Control/optionMenu"]
 layout_mode = 2
-text = "Rounds:  1"
+text = "Rounds:   1"
 flat = true
 
 [node name="Music" type="Button" parent="Control/optionMenu"]
@@ -164,11 +164,11 @@ layout_mode = 2
 [node name="Control" type="Control" parent="Control/optionMenu/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.67
+size_flags_stretch_ratio = 0.2
 
 [node name="Label" type="Label" parent="Control/optionMenu/HBoxContainer"]
 layout_mode = 2
-text = "MAX NUM: "
+text = "MAX NUM:"
 
 [node name="HSlider" type="HSlider" parent="Control/optionMenu/HBoxContainer"]
 layout_mode = 2
@@ -187,7 +187,7 @@ text = "13"
 [node name="Control2" type="Control" parent="Control/optionMenu/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.19
+size_flags_stretch_ratio = 0.2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Control/optionMenu"]
 layout_mode = 2

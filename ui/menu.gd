@@ -107,7 +107,7 @@ func _on_rounds_pressed():
 		Globals.round_set=10
 	else:
 		Globals.round_set=1
-	rounds.text="Rounds: "+str(Globals.round_set)
+	rounds.text="Rounds: %2d"%(Globals.round_set)
 	Globals.save_config()
 
 

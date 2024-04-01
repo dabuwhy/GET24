@@ -22,11 +22,11 @@ msgid "Start"
 msgstr "开始"
 
 #: ui/menu.tscn
-msgid "PK Mode"
+msgid "Pair Mode"
 msgstr "对战模式"
 
 #: ui/pk.tscn
-msgid "PK Mode"
+msgid "Pair Mode"
 msgstr "对战模式"
 
 #: ui/pk.tscn
@@ -78,12 +78,12 @@ msgid "Quit"
 msgstr "离开"
 
 #: ui/menu.tscn
-msgid "Rounds: 1"
-msgstr "局数：  1"
+msgid "Rounds:  1"
+msgstr "局数:  1"
 
 #: ui/menu.tscn
 msgid "Rounds: 10"
-msgstr "局数：  10"
+msgstr "局数:  10"
 
 #: ui/menu.tscn
 msgid "1          4          7          10"
@@ -95,23 +95,23 @@ msgstr "                练习   比赛"
 
 #: ui/menu.tscn
 msgid "Music:  OFF"
-msgstr "音乐：  关"
+msgstr "音乐:  关"
 
 #: ui/menu.tscn
 msgid "Music:  ON"
-msgstr "音乐：  开"
+msgstr "音乐:  开"
 
 #: ui/menu.tscn
 msgid "SFX:  OFF"
-msgstr "音效：  关"
+msgstr "音效:  关"
 
 #: ui/menu.tscn
 msgid "SFX:  ON"
-msgstr "音效：  开"
+msgstr "音效:  开"
 
 #: ui/menu.tscn
 msgid "Language:  "
-msgstr "语言：  "
+msgstr "语言:  "
 
 #: ui/menu.tscn
 msgid "Chinese"
@@ -130,8 +130,8 @@ msgid "Best record in 10 rounds\n(MAX NUM≥13)"
 msgstr "10局赛最佳纪录\n(最大数≥13)"
 
 #: ui/menu.tscn
-msgid "MAX NUM: "
-msgstr "最大数： "
+msgid "MAX NUM:"
+msgstr "最大数:"
 
 #: ui/menu.tscn
 msgid "24 Calculator"
@@ -158,6 +158,6 @@ msgid "About"
 msgstr "关于"
 
 #: ui/about.tscn
-msgid "Drag to add, subtract, multiply, and divide.\nPK mode needs to be on the same WiFi or hotspot.\nFor any suggestions, please contact dabuwhy@qq.com"
+msgid "Drag to add, subtract, multiply, and divide.\nPair mode needs to be on the same WiFi or hotspot.\nFor any suggestions, please contact dabuwhy@qq.com"
 msgstr "拖动以便进行加减乘除.\n对战模式需在同一WiFi或者热点下.\n有任何建议请联系dabuwhy@qq.com"
 
