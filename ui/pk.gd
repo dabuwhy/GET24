@@ -113,7 +113,7 @@ func _process(_delta):
 			print("peer.create_client error:",error)
 func RemovePlayer(id=1)->void:
 	print("RemovePlayer:",id)
-	your_viewport.remove_child(your_viewport.get_child(1))
+	#your_viewport.remove_child(your_viewport.get_child(1))
 
 @rpc("any_peer","call_remote","reliable")
 func myclose(id):
@@ -203,6 +203,8 @@ func _on_server_disconnected()->void:
 	multiplayer.multiplayer_peer=null
 	
 func _on_back_pressed() -> void:
+	if multiplayer.multiplayer_peer!=null:
+		multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer=null
 	Globals.go_to_world("res://ui/menu.tscn")
 
@@ -216,7 +218,10 @@ func _on_h_slider_drag_ended(value_changed: bool) -> void:
 
 func _on_h_slider_value_changed(value: float) -> void:
 	if label.visible && multiplayer.is_server():
+		server.stop()
 		label.visible=false
-	else:
-		max_int.text=str(value)
-		Globals.round_set=value
+		multiplayer.peer_connected.disconnect(AddPlayer)
+		if multiplayer.multiplayer_peer!=null:
+			multiplayer.multiplayer_peer.close()
+	max_int.text=str(value)
+	Globals.round_set=value

@@ -24,6 +24,8 @@ func _ready():
 	if Globals.pkMode:
 		$HBoxContainer/solution.disabled=true
 		restartButton.disabled=true
+		if is_multiplayer_authority():
+			$HBoxContainer/menu.disabled=true
 func updateAns()->void:
 	popup_panel.size.y=100
 	ans.size.y=100
@@ -124,7 +126,7 @@ func _on_forward_pressed():
 
 
 func _on_menu_pressed():
-	if (!Globals.pkMode)||is_multiplayer_authority():
+	if (!Globals.pkMode)||!is_multiplayer_authority():
 		Globals.go_to_world("res://ui/menu.tscn")
 
 
