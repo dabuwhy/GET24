@@ -66,9 +66,7 @@ func MovingNum():
 			Globals.operatorIndex=0
 		else:
 			Globals.operatorIndex=1
-		if otherRect.global_position.y<self.position.y:
-			pass
-		else:
+		if otherRect.global_position.y>self.position.y:
 			Globals.operatorIndex+=2
 		for o in operators:
 			o.modulate=Color(1,1,1,0.6)
@@ -149,15 +147,14 @@ func _process(_delta):
 #many can be in,but only one can be select
 func _on_area_entered(area):
 #	print("_on_area_entered",area)
-	
-	otherRect=area.get_parent()
-	if otherRect in Globals.rectNumber.keys():
+	var tmp=area.get_parent()
+	if tmp in Globals.rectNumber.keys():
+		otherRect=tmp
 		otherRect.beAdd=true
 		beIn=true
 		beSelect=true
 	else:
-		beIn=false
-		otherRect=null
+		pass
 	pass # Replace with function body.
 
 

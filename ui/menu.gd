@@ -42,8 +42,10 @@ func _ready():
 		$Control/mainMenu/Quit.visible=false
 	h_slider.value=Globals.maxInt
 	max_int.text=str(Globals.maxInt)
-
-
+	if TranslationServer.get_locale()=="en":
+		$Control/optionMenu/HBoxContainer2/OptionButton.selected=1
+	else:
+		$Control/optionMenu/HBoxContainer2/OptionButton.selected=0
 func _on_start_pressed():
 	Globals.pkMode=false
 	Globals.round_index=1
