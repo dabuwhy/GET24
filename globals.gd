@@ -9,7 +9,7 @@ const SFX_IDX=2
 var numbers=[]
 var rectNumber={}
 var nameRect={}
-var beSelectRect=null   #a bug ,not consider touch can multi beAdd rects
+var beSelectRect=null   #a bug ,not consider touch can multi movToOp rects
 var operatorIndex:=0
 var history:=[]
 var historyIndex:=0
@@ -205,7 +205,8 @@ func moveTo(rect,from,to):
 		var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 		tween.tween_property(rect, "position", to, 1)
 func moveToShow(rect,from,to):
-	rect.modulate=Color(1,1,1,aniTime)
+	#print("from",rect.name,from,to)
+	rect.modulate=Color(1,1,1,0.6)
 	rect.scale=Vector2(0,0)
 	rect.position=from+Vector2(100,100)
 	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
@@ -219,6 +220,7 @@ func moveToShow(rect,from,to):
 
 func moveToHide(rect,from,to):
 	rect.collision_layer=2
+	rect.number.collision_layer=2
 	rect.modulate=Color(1,1,1,1)
 	rect.scale=Vector2(1,1)
 	rect.position=from

@@ -85,8 +85,8 @@ func revokeAbled():
 		forward.disabled=false
 	else:
 		forward.disabled=true
-func recoveryScene(previous):
-	var now=Globals.history[Globals.historyIndex]
+func recoveryScene(hisIndex,previous):
+	var now=Globals.history[hisIndex]
 	var pre=Globals.history[previous]
 #	print("recoveryScene:",now)
 	for n in Globals.nameRect.keys():
@@ -103,15 +103,16 @@ func recoveryScene(previous):
 	
 func _on_revoke_pressed():
 	if (!Globals.pkMode)||is_multiplayer_authority():
+		revoke.disabled=true
 		if Globals.historyIndex>0:
 			Globals.historyIndex-=1
 			forward.disabled=false
-			recoveryScene(Globals.historyIndex+1)
+			recoveryScene(Globals.historyIndex,Globals.historyIndex+1)
+		await get_tree().create_timer(Globals.aniTime).timeout
+		Globals.reloadOnce=true
+		revoke.disabled=false
 		if Globals.historyIndex<=0:
 			revoke.disabled=true
-		await get_tree().create_timer(1.1).timeout
-		Globals.reloadOnce=true
-	
 
 
 func _on_forward_pressed():
@@ -119,10 +120,9 @@ func _on_forward_pressed():
 		if Globals.historyIndex<Globals.history.size()-1:
 			Globals.historyIndex+=1
 			revoke.disabled=false
-			recoveryScene(Globals.historyIndex-1)
+			recoveryScene(Globals.historyIndex,Globals.historyIndex-1)
 		if Globals.historyIndex>=Globals.history.size()-1:
 			forward.disabled=true
-	
 
 
 func _on_menu_pressed():

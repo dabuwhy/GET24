@@ -160,7 +160,7 @@ func _process(delta):
 		for r in Globals.rectNumber.keys():
 			if r!=null && r.collision_layer==1:
 				collision1Rect+=1
-				if r.beAdd:
+				if r.movToOp:
 					beAddRect=r
 				elif r.beIn:
 					beInRects.append(r)
@@ -199,4 +199,4 @@ func _process(delta):
 				else:
 					beInRects[j].beSelect=true		
 		elif beAddRect!=null && beInRects.size()==0:
-			beAddRect.beAdd=false
+			beAddRect.movToOp=false

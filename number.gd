@@ -6,7 +6,7 @@ signal MergeNumber
 @export var num:='7'
 @export var beIn=false
 @export var beSelect=false
-@export var beAdd:=false
+@export var movToOp:=false
 const MOVE_SPEED = 10.0
 
 
@@ -30,7 +30,7 @@ func _ready():
 	operators.append($operator3)
 	operators.append($operator4)
 func releasedOrBeIn():
-	if beAdd:
+	if movToOp:
 		MovingNum()
 		var res=Globals.Calc2Num(Globals.rectNumber[Globals.beSelectRect],Globals.rectNumber[self],Globals.operatorIndex)
 		if res>=0:
@@ -124,7 +124,7 @@ func _on_input_event(viewport, event, shape_idx):
 func _process(_delta):
 	self.label.text=num
 	if (!Globals.pkMode)||is_multiplayer_authority():
-		if !self.isMoving:
+		if !self.isMoving && self.collision_layer==1:
 			inScreenPos=self.position.clamp(Vector2.ZERO,get_viewport_rect().size-$CollisionShape2D.shape.size)
 			dir=Vector2.ZERO
 			if inScreenPos.distance_squared_to(self.position) > 4.0:
@@ -150,7 +150,7 @@ func _on_area_entered(area):
 	var tmp=area.get_parent()
 	if tmp in Globals.rectNumber.keys():
 		otherRect=tmp
-		otherRect.beAdd=true
+		otherRect.movToOp=true
 		beIn=true
 		beSelect=true
 	else:
